@@ -1,0 +1,6 @@
+{
+  "name": "EBRADI - Escola Brasileira de Direito",
+  "description": "Portal oficial da EBRADI - Escola Brasileira de Direito. Pós-Graduação Jurídica com Nota 5 no MEC, Preparatórios OAB, Cursos de Extensão e Prática com os maiores juristas do Brasil.",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}
