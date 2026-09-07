@@ -118,6 +118,34 @@ export const GithubExportModal: React.FC<GithubExportModalProps> = ({
         {/* Scrollable Content */}
         <div className="p-6 sm:p-8 overflow-y-auto space-y-6 text-slate-700 text-xs sm:text-sm">
           
+          {/* Solução para a Página Branca no GitHub Pages */}
+          <div className="p-4 sm:p-5 rounded-2xl bg-emerald-50 border border-emerald-300 text-emerald-950 space-y-2.5">
+            <div className="flex items-center gap-2 text-emerald-900 font-bold text-sm">
+              <span className="w-2.5 h-2.5 rounded-full bg-emerald-500 animate-pulse" />
+              <span>Como Corrigir a Página Branca no GitHub Pages:</span>
+            </div>
+            <p className="text-xs text-emerald-900 leading-relaxed">
+              A página fica branca porque projetos React + Vite precisam ser <strong>compilados (build)</strong> antes de serem exibidos pelo navegador, enquanto o GitHub Pages estava tentando carregar os arquivos TypeScript brutos (<code className="bg-emerald-100 px-1 py-0.5 rounded font-mono">/src/main.tsx</code>).
+            </p>
+            <div className="bg-white/80 p-3 rounded-xl border border-emerald-200 text-xs space-y-2 text-slate-800">
+              <span className="font-bold text-emerald-900 block">Siga estes 2 passos simples no seu repositório:</span>
+              <ol className="list-decimal list-inside space-y-1.5 pl-1">
+                <li>
+                  No GitHub, abra seu repositório (<code className="font-mono text-slate-900 bg-slate-100 px-1">weversoncdo/ebradicompleto2</code>) e clique na aba <strong>Settings</strong> (Configurações).
+                </li>
+                <li>
+                  No menu lateral esquerdo, clique em <strong>Pages</strong>.
+                </li>
+                <li>
+                  Em <strong>Build and deployment &gt; Source</strong>, troque de <em>Deploy from a branch</em> para <strong>GitHub Actions</strong>.
+                </li>
+                <li>
+                  Sincronize os arquivos deste projeto no git (eles já incluem o workflow automático em <code className="font-mono text-slate-900 bg-slate-100 px-1">.github/workflows/deploy.yml</code> e <code className="font-mono text-slate-900 bg-slate-100 px-1">base: './'</code> no Vite). O GitHub fará o build e o site entrará no ar em segundos!
+                </li>
+              </ol>
+            </div>
+          </div>
+
           {/* Quick Notice */}
           <div className="p-4 rounded-xl bg-amber-50 border border-amber-200 text-amber-900 flex items-start gap-3">
             <ShieldCheck className="w-5 h-5 text-amber-600 shrink-0 mt-0.5" />

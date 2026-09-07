@@ -333,11 +333,14 @@ export const Footer: React.FC<FooterProps> = ({
             {/* Logo: E.png */}
             <div className="my-3 py-1 flex items-center justify-center">
               <img 
-                src="/E.png" 
-                alt="Logo" 
+                src="./E.png" 
+                alt="Logo EBRADI" 
                 id="footer-logo-e"
                 className="w-7 h-12 object-contain select-none"
                 loading="lazy"
+                onError={(e) => {
+                  (e.currentTarget as HTMLImageElement).src = '/E.png';
+                }}
               />
             </div>
 
@@ -349,9 +352,12 @@ export const Footer: React.FC<FooterProps> = ({
           <div className="flex lg:hidden items-center justify-center w-full my-3 gap-4">
             <div className="h-[1px] flex-1 bg-[#9ba3a8]" />
             <img 
-              src="/E.png" 
-              alt="Logo" 
+              src="./E.png" 
+              alt="Logo EBRADI" 
               className="w-6 h-10 object-contain"
+              onError={(e) => {
+                (e.currentTarget as HTMLImageElement).src = '/E.png';
+              }}
             />
             <div className="h-[1px] flex-1 bg-[#9ba3a8]" />
           </div>

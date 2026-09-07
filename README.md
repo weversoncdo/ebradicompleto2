@@ -145,6 +145,20 @@ git push -u origin main
 
 ---
 
+## 🌐 Como Publicar no GitHub Pages Sem Erro de Tela Branca
+
+Se a sua página no GitHub Pages (`https://weversoncdo.github.io/ebradicompleto2/`) estiver ficando em branco, é porque projetos React/Vite precisam ser compilados antes de o navegador poder lê-los.
+
+Para resolver com 1 clique usando o **GitHub Actions** já configurado no projeto:
+
+1. No seu repositório no GitHub (`weversoncdo/ebradicompleto2`), clique na aba **Settings** (Configurações).
+2. No menu lateral esquerdo, clique em **Pages**.
+3. Em **Build and deployment > Source**, mude de *"Deploy from a branch"* para **GitHub Actions**.
+4. Faça um `git push` (ou clique em Actions > *Deploy to GitHub Pages* > *Run workflow*).
+5. Pronto! O GitHub Actions fará o build do Vite automaticamente e o site estará no ar em `https://weversoncdo.github.io/ebradicompleto2/`.
+
+---
+
 ## ⚖️ Aviso Legal e Direitos de Marca
 
 Este projeto foi construído para fins educacionais, de demonstração técnica e portfólio de engenharia de software e design de interfaces, reproduzindo a estrutura pública da Escola Brasileira de Direito (EBRADI / Ânima Educação). As marcas e nomes de patronos pertencem aos seus respectivos titulares.
