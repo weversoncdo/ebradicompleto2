@@ -18,14 +18,12 @@ import {
 interface FooterProps {
   onOpenStudentPortal?: () => void;
   onOpenEnrollment?: () => void;
-  onOpenGithubModal?: () => void;
   onSelectCategory?: (category: string) => void;
 }
 
 export const Footer: React.FC<FooterProps> = ({
   onOpenStudentPortal,
   onOpenEnrollment,
-  onOpenGithubModal,
   onSelectCategory,
 }) => {
   const [showAccessibilityModal, setShowAccessibilityModal] = useState<boolean>(false);

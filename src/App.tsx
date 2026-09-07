@@ -15,8 +15,7 @@ import { FaqSection } from './components/FaqSection';
 import { Footer } from './components/Footer';
 import { EnrollmentModal } from './components/EnrollmentModal';
 import { StudentPortalModal } from './components/StudentPortalModal';
-import { GithubExportModal } from './components/GithubExportModal';
-import { MessageCircle, Github, ArrowUp } from 'lucide-react';
+import { MessageCircle, ArrowUp } from 'lucide-react';
 
 export default function App() {
   const [selectedCategory, setSelectedCategory] = useState<string>('all');
@@ -27,7 +26,6 @@ export default function App() {
   const [courseForEnrollment, setCourseForEnrollment] = useState<Course | null>(null);
   const [isEnrollmentOpen, setIsEnrollmentOpen] = useState<boolean>(false);
   const [isStudentPortalOpen, setIsStudentPortalOpen] = useState<boolean>(false);
-  const [isGithubModalOpen, setIsGithubModalOpen] = useState<boolean>(false);
   
   // Active discount applied from calculator
   const [activeDiscount, setActiveDiscount] = useState<{ percentage: number; label: string } | undefined>(undefined);
@@ -66,7 +64,6 @@ export default function App() {
       <Navbar
         onOpenStudentPortal={() => setIsStudentPortalOpen(true)}
         onOpenEnrollment={handleOpenEnrollmentGeneral}
-        onOpenGithubModal={() => setIsGithubModalOpen(true)}
         onSelectCategory={(cat) => setSelectedCategory(cat)}
         searchQuery={searchQuery}
         setSearchQuery={setSearchQuery}
@@ -125,7 +122,6 @@ export default function App() {
       <Footer
         onOpenStudentPortal={() => setIsStudentPortalOpen(true)}
         onOpenEnrollment={handleOpenEnrollmentGeneral}
-        onOpenGithubModal={() => setIsGithubModalOpen(true)}
         onSelectCategory={(cat) => setSelectedCategory(cat)}
       />
 
@@ -155,11 +151,6 @@ export default function App() {
         onClose={() => setIsStudentPortalOpen(false)}
       />
 
-      <GithubExportModal
-        isOpen={isGithubModalOpen}
-        onClose={() => setIsGithubModalOpen(false)}
-      />
-
       {/* Floating Action Buttons */}
       <div className="fixed bottom-6 right-6 z-30 flex flex-col items-end gap-3 pointer-events-none">
         
@@ -183,18 +174,6 @@ export default function App() {
           title="Voltar ao topo"
         >
           <ArrowUp className="w-4 h-4" />
-        </button>
-      </div>
-
-      {/* Floating GitHub Quick Badge (Bottom-Left) */}
-      <div className="fixed bottom-6 left-6 z-30 pointer-events-auto">
-        <button
-          onClick={() => setIsGithubModalOpen(true)}
-          className="flex items-center gap-2 px-3.5 py-2 rounded-full bg-slate-900/90 backdrop-blur-md hover:bg-slate-950 text-amber-400 hover:text-amber-300 font-bold text-xs shadow-xl border border-slate-700/80 transition-all transform hover:scale-105 cursor-pointer"
-          title="Ver arquivos do projeto e comandos para enviar no GitHub"
-        >
-          <Github className="w-4 h-4 text-white" />
-          <span>Arquivos para GitHub</span>
         </button>
       </div>
 

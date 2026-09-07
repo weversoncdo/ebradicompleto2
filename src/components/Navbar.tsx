@@ -10,15 +10,14 @@ import {
   Scale, 
   Award, 
   BookOpen, 
-  Github, 
   ChevronRight,
   ExternalLink
 } from 'lucide-react';
+import { EbradiLogo } from './EbradiLogo';
 
 interface NavbarProps {
   onOpenStudentPortal: () => void;
   onOpenEnrollment: () => void;
-  onOpenGithubModal: () => void;
   onSelectCategory: (category: string) => void;
   searchQuery: string;
   setSearchQuery: (query: string) => void;
@@ -27,7 +26,6 @@ interface NavbarProps {
 export const Navbar: React.FC<NavbarProps> = ({
   onOpenStudentPortal,
   onOpenEnrollment,
-  onOpenGithubModal,
   onSelectCategory,
   searchQuery,
   setSearchQuery,
@@ -81,14 +79,6 @@ export const Navbar: React.FC<NavbarProps> = ({
               <span className="hidden sm:inline">WhatsApp Consultores</span>
             </a>
 
-            <button
-              onClick={onOpenGithubModal}
-              className="flex items-center gap-1 text-amber-400 hover:text-amber-300 font-medium px-2 py-0.5 rounded bg-amber-950/40 border border-amber-500/30 transition-colors"
-              title="Ver arquivos para enviar no GitHub"
-            >
-              <Github className="w-3.5 h-3.5" />
-              <span>Arquivos GitHub</span>
-            </button>
 
             <button 
               onClick={onOpenStudentPortal}
@@ -104,24 +94,9 @@ export const Navbar: React.FC<NavbarProps> = ({
       {/* Main Navbar */}
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex items-center justify-between h-20">
-          {/* Logo EBRADI */}
-          <a href="#" className="flex items-center gap-3 group focus:outline-none">
-            <div className="w-12 h-12 rounded-lg bg-gradient-to-br from-[#0b1b36] to-[#162d59] flex items-center justify-center shadow-md border border-slate-200 group-hover:scale-105 transition-transform">
-              <Scale className="w-7 h-7 text-amber-400" />
-            </div>
-            <div className="flex flex-col">
-              <div className="flex items-baseline gap-1.5">
-                <span className="font-cinzel text-2xl font-bold tracking-tight text-[#0b1b36]">
-                  EBRADI
-                </span>
-                <span className="text-[11px] font-bold uppercase tracking-widest text-red-600 border border-red-600/30 px-1 py-0.2 rounded bg-red-50">
-                  DIREITO
-                </span>
-              </div>
-              <span className="text-[10px] font-semibold tracking-wider text-slate-500 uppercase">
-                Escola Brasileira de Direito • Ânima
-              </span>
-            </div>
+          {/* Logo EBRADI 10 ANOS */}
+          <a href="#" className="flex items-center group focus:outline-none py-1 hover:opacity-95 transition-opacity" title="EBRADI 10 Anos - Escola Brasileira de Direito">
+            <EbradiLogo variant="light" size="md" className="group-hover:scale-102 transition-transform duration-200" />
           </a>
 
           {/* Desktop Navigation Links */}
@@ -303,16 +278,7 @@ export const Navbar: React.FC<NavbarProps> = ({
               <User className="w-4 h-4 text-red-600" />
               Acessar Área do Aluno (SIA)
             </button>
-            <button
-              onClick={() => {
-                setIsMobileMenuOpen(false);
-                onOpenGithubModal();
-              }}
-              className="w-full py-2.5 rounded-lg bg-slate-900 text-white font-medium text-center text-xs flex items-center justify-center gap-2"
-            >
-              <Github className="w-4 h-4" />
-              Ver Código & Instruções para GitHub
-            </button>
+
           </div>
         </div>
       )}
