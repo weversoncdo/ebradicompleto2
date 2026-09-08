@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { TESTIMONIALS } from '../data/testimonials';
 import { Star, Award, CheckCircle2, MessageSquareQuote, ThumbsUp, Sparkles, UserCheck } from 'lucide-react';
+import { SecuritySealsBar } from './SecuritySealsBar';
 
 export const TestimonialsSection: React.FC = () => {
   const [activeFilter, setActiveFilter] = useState<string>('todos');
@@ -138,44 +139,8 @@ export const TestimonialsSection: React.FC = () => {
           ))}
         </div>
 
-        {/* Institutional Trust Banner below comments */}
-        <div className="mt-14 bg-[#0b1b36] text-white rounded-2xl p-6 sm:p-8 shadow-xl grid grid-cols-2 md:grid-cols-4 gap-6 text-center">
-          <div>
-            <span className="text-3xl sm:text-4xl font-extrabold text-amber-400 block font-cinzel">
-              +40.000
-            </span>
-            <span className="text-xs sm:text-sm text-slate-300 uppercase tracking-wider font-semibold mt-1 block">
-              Alunos e Advogados
-            </span>
-          </div>
-
-          <div>
-            <span className="text-3xl sm:text-4xl font-extrabold text-emerald-400 block font-cinzel">
-              Nota 5
-            </span>
-            <span className="text-xs sm:text-sm text-slate-300 uppercase tracking-wider font-semibold mt-1 block">
-              Conceito Máximo no MEC
-            </span>
-          </div>
-
-          <div>
-            <span className="text-3xl sm:text-4xl font-extrabold text-amber-400 block font-cinzel">
-              4.9 / 5.0
-            </span>
-            <span className="text-xs sm:text-sm text-slate-300 uppercase tracking-wider font-semibold mt-1 block">
-              Avaliação Média dos Alunos
-            </span>
-          </div>
-
-          <div>
-            <span className="text-3xl sm:text-4xl font-extrabold text-white block font-cinzel">
-              100%
-            </span>
-            <span className="text-xs sm:text-sm text-slate-300 uppercase tracking-wider font-semibold mt-1 block">
-              Online com Certificação
-            </span>
-          </div>
-        </div>
+        {/* Security Seals Trust Banner (Norton Secured, Actalis, SiteLock) */}
+        <SecuritySealsBar className="mt-14" />
 
       </div>
 

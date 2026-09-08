@@ -162,15 +162,42 @@ const crcTable = (() => {
   return table;
 })();
 
-const zipBuffer = createZip([
+const ePngBuffer = fs.existsSync(path.join(process.cwd(), 'public', 'E.png'))
+  ? fs.readFileSync(path.join(process.cwd(), 'public', 'E.png'))
+  : null;
+
+const zipFiles = [
   { name: 'ebradi-home-standalone.html', content: standaloneHtml },
   { name: 'index.html', content: cleanHtml },
   { name: 'styles.css', content: rawCss },
   { name: 'app.js', content: rawJs },
   { name: 'README.txt', content: readme },
-]);
+];
+
+if (ePngBuffer) {
+  zipFiles.push({ name: 'E.png', content: ePngBuffer });
+}
+
+const zipBuffer = createZip(zipFiles);
 
 fs.writeFileSync(path.join(downloadPath, 'ebradi-home-codigo.zip'), zipBuffer);
+
+// Also copy to docs/ folder for GitHub Pages if exists
+const docsDownloadPath = path.resolve(process.cwd(), 'docs', 'download');
+if (fs.existsSync(docsDownloadPath)) {
+  fs.copyFileSync(path.join(downloadPath, 'ebradi-home-standalone.html'), path.join(docsDownloadPath, 'ebradi-home-standalone.html'));
+  fs.copyFileSync(path.join(downloadPath, 'index.html'), path.join(docsDownloadPath, 'index.html'));
+  fs.copyFileSync(path.join(downloadPath, 'styles.css'), path.join(docsDownloadPath, 'styles.css'));
+  fs.copyFileSync(path.join(downloadPath, 'app.js'), path.join(docsDownloadPath, 'app.js'));
+  fs.copyFileSync(path.join(downloadPath, 'README.txt'), path.join(docsDownloadPath, 'README.txt'));
+  fs.copyFileSync(path.join(downloadPath, 'ebradi-home-codigo.zip'), path.join(docsDownloadPath, 'ebradi-home-codigo.zip'));
+  if (ePngBuffer) {
+    fs.copyFileSync(path.join(process.cwd(), 'public', 'E.png'), path.join(docsDownloadPath, 'E.png'));
+  }
+}
+if (fs.existsSync(path.resolve(process.cwd(), 'docs')) && ePngBuffer) {
+  fs.copyFileSync(path.join(process.cwd(), 'public', 'E.png'), path.join(process.cwd(), 'docs', 'E.png'));
+}
 
 console.log('✅ Generated standalone files and ZIP in public/download/:');
 console.log('- ebradi-home-standalone.html (' + (standaloneHtml.length / 1024).toFixed(1) + ' KB)');
