@@ -397,63 +397,11 @@ export const AccessibilityMenu: React.FC<AccessibilityMenuProps> = ({
         }
       `}</style>
 
-      {/* Floating Trigger Button at Bottom Left */}
-      <div className="fixed bottom-4 left-4 sm:bottom-6 sm:left-6 z-50">
-        <button
-          id="accessibility-menu"
-          type="button"
-          role="button"
-          title={isOpen ? "Fechar Menu de Acessibilidade" : "Abrir Menu de Acessibilidade"}
-          aria-disabled="false"
-          aria-label={isOpen ? "Fechar Menu de Acessibilidade" : "Abrir Menu de Acessibilidade"}
-          aria-hidden="false"
-          aria-expanded={isOpen}
-          onClick={onToggle}
-          className={`_11y_Button_button_3b44e _11y_MenuIcon_icon_10c15 _11y_MenuIcon_left-bottom_010f2 false false _11y_MenuIcon_z-index-max_0c692 _11y_Button_fadeUp_94261 relative w-12 h-12 sm:w-13 sm:h-13 rounded-full flex items-center justify-center transition-all duration-300 shadow-xl cursor-pointer focus:outline-none focus:ring-4 focus:ring-cyan-400 ${
-            isOpen 
-              ? 'bg-white text-slate-800 border-2 border-slate-300 hover:bg-slate-100 hover:scale-105' 
-              : 'bg-white hover:scale-110 border-2 border-slate-200'
-          }`}
-        >
-          {isOpen ? (
-            /* Close State (matches image 2 bottom left) */
-            <X className="w-6 h-6 text-slate-800 stroke-[2.5]" />
-          ) : (
-            /* Vitruvian Accessibility Icon (matches image 1) */
-            <div className="w-10 h-10 rounded-full flex items-center justify-center relative select-none">
-              <svg 
-                viewBox="0 0 100 100" 
-                className="w-9 h-9"
-                fill="none" 
-                xmlns="http://www.w3.org/2000/svg"
-              >
-                {/* Outer concentric guide circle */}
-                <circle cx="50" cy="50" r="46" stroke="#1e293b" strokeWidth="3" />
-                {/* Figure Head (Cyan filled circle) */}
-                <circle cx="50" cy="28" r="8" fill="#00BCD4" stroke="#0f172a" strokeWidth="2" />
-                {/* Outstretched Arms */}
-                <line x1="22" y1="46" x2="78" y2="46" stroke="#1e293b" strokeWidth="4" strokeLinecap="round" />
-                {/* Body Spine */}
-                <line x1="50" y1="36" x2="50" y2="64" stroke="#1e293b" strokeWidth="4" strokeLinecap="round" />
-                {/* Outstretched Legs */}
-                <line x1="50" y1="62" x2="26" y2="82" stroke="#1e293b" strokeWidth="4" strokeLinecap="round" />
-                <line x1="50" y1="62" x2="74" y2="82" stroke="#1e293b" strokeWidth="4" strokeLinecap="round" />
-                {/* Nodes on hands and feet (Cyan dots) */}
-                <circle cx="22" cy="46" r="3.5" fill="#00BCD4" />
-                <circle cx="78" cy="46" r="3.5" fill="#00BCD4" />
-                <circle cx="26" cy="82" r="3.5" fill="#00BCD4" />
-                <circle cx="74" cy="82" r="3.5" fill="#00BCD4" />
-              </svg>
-            </div>
-          )}
-        </button>
-      </div>
-
       {/* Accessibility Modal Window (matches image 2) */}
       {isOpen && (
         <div 
           id="accessibility-modal-card"
-          className="fixed bottom-20 left-4 sm:bottom-22 sm:left-6 z-50 w-[calc(100vw-2rem)] sm:w-[390px] max-w-[420px] bg-[#e6e9ee] rounded-[26px] shadow-2xl border-4 border-slate-300/80 overflow-hidden text-slate-800 animate-in fade-in slide-in-from-bottom-6 duration-200"
+          className="fixed bottom-6 left-4 sm:bottom-8 sm:left-6 z-50 w-[calc(100vw-2rem)] sm:w-[390px] max-w-[420px] bg-[#e6e9ee] rounded-[26px] shadow-2xl border-4 border-slate-300/80 overflow-hidden text-slate-800 animate-in fade-in slide-in-from-bottom-6 duration-200"
         >
           {/* Top Bar / Header */}
           <div className="p-4 sm:p-4.5 pb-3">
@@ -471,6 +419,16 @@ export const AccessibilityMenu: React.FC<AccessibilityMenuProps> = ({
                   title="Sobre a acessibilidade"
                 >
                   <Info className="w-3.5 h-3.5" />
+                </button>
+
+                {/* Close Button */}
+                <button
+                  type="button"
+                  onClick={onClose}
+                  className="w-7 h-7 rounded-full bg-slate-200 hover:bg-slate-300 text-slate-700 flex items-center justify-center transition-colors cursor-pointer"
+                  title="Fechar"
+                >
+                  <X className="w-4 h-4" />
                 </button>
 
                 {/* Sound Toggle */}
