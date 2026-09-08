@@ -8,7 +8,7 @@ import { CourseDetailModal } from './components/CourseDetailModal';
 import { PatronosSection } from './components/PatronosSection';
 import { OabSpecialSection } from './components/OabSpecialSection';
 import { MethodologySection } from './components/MethodologySection';
-import { ScholarshipCalculator } from './components/ScholarshipCalculator';
+import { PartnersSection } from './components/PartnersSection';
 import { TestimonialsSection } from './components/TestimonialsSection';
 import { ArticlesSection } from './components/ArticlesSection';
 import { FaqSection } from './components/FaqSection';
@@ -105,9 +105,9 @@ export default function App() {
         {/* 5. Metodologia EBRADI & Nota 5 MEC */}
         <MethodologySection />
 
-        {/* 6. Simulador Interativo de Bolsas de Estudo */}
-        <ScholarshipCalculator
-          onEnrollWithDiscount={handleEnrollWithDiscount}
+        {/* 6. Nossos Parceiros (Convênios OAB, IASP, CAAs) */}
+        <PartnersSection
+          onOpenEnrollment={handleOpenEnrollmentGeneral}
         />
 
         {/* 7. Depoimentos e Casos de Sucesso */}
