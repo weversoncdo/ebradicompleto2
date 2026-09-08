@@ -13,7 +13,8 @@ import {
   Sparkles,
   Filter,
   ShieldCheck,
-  Zap
+  Zap,
+  CreditCard
 } from 'lucide-react';
 
 interface CourseCatalogProps {
@@ -189,78 +190,75 @@ export const CourseCatalog: React.FC<CourseCatalogProps> = ({
             {filteredCourses.map((course) => (
               <div
                 key={course.id}
-                className="bg-white rounded-2xl border border-slate-200 shadow-sm hover:shadow-xl hover:border-slate-300 transition-all duration-300 flex flex-col justify-between overflow-hidden group"
+                className="bg-[#0b1a28] rounded-2xl border border-slate-800 shadow-xl hover:shadow-2xl hover:border-slate-700 transition-all duration-300 flex flex-col justify-between overflow-hidden group"
               >
                 <div>
-                  {/* Card Header Top Badges */}
-                  <div className="p-5 pb-3 border-b border-slate-100 bg-gradient-to-r from-slate-50 to-white flex items-center justify-between">
-                    <span className="text-[11px] font-bold text-slate-500 uppercase tracking-wider">
-                      {course.area}
-                    </span>
+                  {/* Card Image Area with Overlaid Badges and Smooth Fade */}
+                  <div className="relative w-full h-56 sm:h-60 overflow-hidden bg-slate-900">
+                    <img
+                      src={course.cardImage || course.coordinatorPhoto}
+                      alt={course.title}
+                      className="w-full h-full object-cover object-top group-hover:scale-105 transition-transform duration-500"
+                    />
+                    {/* Deep gradient fade at the bottom into the card */}
+                    <div className="absolute inset-0 bg-gradient-to-t from-[#0b1a28] via-[#0b1a28]/40 to-transparent" />
 
-                    <div className="flex items-center gap-1.5">
-                      {course.mecGrade && (
-                        <span className="inline-flex items-center gap-1 px-2 py-0.5 rounded bg-emerald-100 text-emerald-800 text-[10px] font-bold">
-                          <Award className="w-3 h-3 text-emerald-600" />
-                          MEC 5
-                        </span>
-                      )}
-                      {course.badge && (
-                        <span className="px-2 py-0.5 rounded bg-red-100 text-red-700 text-[10px] font-bold">
-                          {course.badge}
-                        </span>
-                      )}
+                    {/* Top Left Badge: ONLINE */}
+                    <div className="absolute top-3.5 left-3.5 z-10">
+                      <span className="px-3 py-1 bg-[#1d61c6] text-white text-[11px] font-black uppercase tracking-wider rounded shadow-md">
+                        ONLINE
+                      </span>
+                    </div>
+
+                    {/* Top Right Badge: Discount */}
+                    <div className="absolute top-3.5 right-3.5 z-10">
+                      <span className="px-3 py-1 bg-[#d92525] text-white text-[11px] font-black uppercase tracking-wider rounded shadow-md">
+                        {course.discountBadge || '35% OFF'}
+                      </span>
                     </div>
                   </div>
 
                   {/* Card Body */}
-                  <div className="p-6 space-y-4">
+                  <div className="p-6 pt-3 space-y-3.5">
+                    {/* Category Pill Tag */}
+                    <div className="flex items-center gap-2">
+                      <span className="inline-block px-3 py-1 rounded bg-[#7e22ce] text-white text-[11px] font-extrabold uppercase tracking-wider shadow-sm">
+                        {course.categoryTag || (course.category === 'pos' ? 'PÓS-GRADUAÇÃO' : course.category === 'oab' ? 'PREPARATÓRIO OAB' : 'LAW CASE')}
+                      </span>
+
+                      {course.mecGrade && (
+                        <span className="inline-flex items-center gap-1 px-2 py-0.5 rounded bg-emerald-950/80 border border-emerald-500/40 text-emerald-300 text-[10px] font-bold">
+                          <Award className="w-3 h-3 text-emerald-400" />
+                          MEC 5
+                        </span>
+                      )}
+
+                      {course.badge && !course.mecGrade && (
+                        <span className="px-2 py-0.5 rounded bg-slate-800 text-amber-300 border border-amber-500/30 text-[10px] font-bold">
+                          {course.badge}
+                        </span>
+                      )}
+                    </div>
+
+                    {/* Course Title in Bold Uppercase White */}
                     <h3 
                       onClick={() => onSelectCourse(course)}
-                      className="text-lg font-bold text-[#0b1b36] group-hover:text-red-600 transition-colors cursor-pointer leading-snug line-clamp-2"
+                      className="text-lg sm:text-xl font-black text-white group-hover:text-red-400 transition-colors cursor-pointer leading-snug uppercase tracking-tight line-clamp-2"
                     >
                       {course.title}
                     </h3>
 
-                    {/* Metadata Row */}
-                    <div className="flex items-center gap-4 text-xs text-slate-500">
-                      <div className="flex items-center gap-1">
-                        <Clock className="w-3.5 h-3.5 text-slate-400" />
-                        <span>{course.duration}</span>
-                      </div>
-                      <div className="flex items-center gap-1">
-                        <BookOpen className="w-3.5 h-3.5 text-slate-400" />
-                        <span>{course.hours}</span>
-                      </div>
-                    </div>
-
-                    {/* Coordinator Preview */}
-                    <div className="flex items-center gap-3 p-3 rounded-xl bg-slate-50 border border-slate-100">
-                      <img
-                        src={course.coordinatorPhoto}
-                        alt={course.coordinator}
-                        className="w-10 h-10 rounded-full object-cover border border-slate-300 shadow-xs"
-                      />
-                      <div className="text-xs">
-                        <span className="font-bold text-[#0b1b36] block line-clamp-1">
-                          {course.coordinator}
-                        </span>
-                        <span className="text-slate-500 text-[11px] block line-clamp-1">
-                          {course.coordinatorRole}
-                        </span>
-                      </div>
-                    </div>
 
                     {/* Brief Description */}
-                    <p className="text-xs text-slate-600 leading-relaxed line-clamp-3">
+                    <p className="text-xs text-slate-300 leading-relaxed line-clamp-3">
                       {course.description}
                     </p>
 
                     {/* Highlights bullet points */}
                     <div className="space-y-1.5 pt-1">
                       {course.highlights.slice(0, 2).map((hl, idx) => (
-                        <div key={idx} className="flex items-start gap-2 text-[11px] text-slate-600">
-                          <Check className="w-3.5 h-3.5 text-emerald-500 shrink-0 mt-0.5" />
+                        <div key={idx} className="flex items-start gap-2 text-[11px] text-slate-300">
+                          <Check className="w-3.5 h-3.5 text-emerald-400 shrink-0 mt-0.5" />
                           <span className="line-clamp-1">{hl}</span>
                         </div>
                       ))}
@@ -268,32 +266,46 @@ export const CourseCatalog: React.FC<CourseCatalogProps> = ({
                   </div>
                 </div>
 
-                {/* Card Footer: Pricing & Action Buttons */}
-                <div className="p-6 pt-4 border-t border-slate-100 bg-slate-50/50 space-y-4">
-                  <div className="flex items-baseline justify-between">
+                {/* Card Footer: Pricing, Clock & Card Metadata, and Action Buttons */}
+                <div className="p-6 pt-3 space-y-4">
+                  {/* Pricing Row */}
+                  <div className="pt-3 border-t border-slate-800 flex items-baseline justify-between">
                     <div>
                       <span className="text-[11px] text-slate-400 block line-through">
                         De R$ {course.originalPrice.toFixed(2).replace('.', ',')}
                       </span>
                       <div className="flex items-baseline gap-1">
-                        <span className="text-xs text-slate-600 font-semibold">
+                        <span className="text-xs text-slate-400 font-semibold">
                           {course.installments}x de
                         </span>
-                        <span className="text-2xl font-extrabold text-[#0b1b36]">
+                        <span className="text-2xl font-black text-white">
                           R$ {course.promotionalPrice.toFixed(2).replace('.', ',')}
                         </span>
                       </div>
                     </div>
 
-                    <span className="text-[10px] font-bold text-emerald-700 bg-emerald-50 border border-emerald-200 px-2 py-1 rounded">
+                    <span className="text-[10px] font-bold text-emerald-300 bg-emerald-950/60 border border-emerald-500/30 px-2.5 py-1 rounded">
                       Início Imediato
                     </span>
                   </div>
 
-                  <div className="grid grid-cols-2 gap-2">
+                  {/* Metadata Row matching the attached image: Clock + Credit Card */}
+                  <div className="flex items-center justify-between text-xs text-slate-400 pt-2 border-t border-slate-800/80">
+                    <div className="flex items-center gap-1.5">
+                      <Clock className="w-4 h-4 text-slate-400" />
+                      <span>{course.hours}</span>
+                    </div>
+                    <div className="flex items-center gap-1.5">
+                      <CreditCard className="w-4 h-4 text-slate-400" />
+                      <span>Até {course.installments}x no Cartão</span>
+                    </div>
+                  </div>
+
+                  {/* Action Buttons */}
+                  <div className="grid grid-cols-2 gap-2.5 pt-1">
                     <button
                       onClick={() => onSelectCourse(course)}
-                      className="py-2.5 px-3 rounded-lg border border-slate-300 hover:border-slate-400 text-slate-700 font-bold text-xs text-center transition-colors hover:bg-slate-100 flex items-center justify-center gap-1 cursor-pointer"
+                      className="py-2.5 px-3 rounded-lg border border-slate-700 hover:border-slate-500 text-slate-200 font-bold text-xs text-center transition-colors hover:bg-slate-800/80 flex items-center justify-center gap-1 cursor-pointer"
                     >
                       <span>Ver Ementa</span>
                       <ArrowUpRight className="w-3.5 h-3.5" />
@@ -301,7 +313,7 @@ export const CourseCatalog: React.FC<CourseCatalogProps> = ({
 
                     <button
                       onClick={() => onEnrollCourse(course)}
-                      className="py-2.5 px-3 rounded-lg bg-red-600 hover:bg-red-700 text-white font-bold text-xs uppercase tracking-wider text-center shadow-sm hover:shadow transition-all flex items-center justify-center gap-1 cursor-pointer"
+                      className="py-2.5 px-3 rounded-lg bg-red-600 hover:bg-red-700 text-white font-extrabold text-xs uppercase tracking-wider text-center shadow-md hover:shadow-lg transition-all flex items-center justify-center gap-1 cursor-pointer"
                     >
                       <span>Garantir Vaga</span>
                     </button>

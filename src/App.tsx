@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import { Course } from './types';
 import { COURSES } from './data/courses';
 import { Navbar } from './components/Navbar';
+import { PosGraduacaoBannerCarousel } from './components/PosGraduacaoBannerCarousel';
 import { HeroSection } from './components/HeroSection';
 import { CourseCatalog } from './components/CourseCatalog';
 import { CourseDetailModal } from './components/CourseDetailModal';
@@ -15,7 +16,8 @@ import { FaqSection } from './components/FaqSection';
 import { Footer } from './components/Footer';
 import { EnrollmentModal } from './components/EnrollmentModal';
 import { StudentPortalModal } from './components/StudentPortalModal';
-import { MessageCircle, ArrowUp } from 'lucide-react';
+import { DownloadPageModal } from './components/DownloadPageModal';
+import { MessageCircle, ArrowUp, Download } from 'lucide-react';
 
 export default function App() {
   const [selectedCategory, setSelectedCategory] = useState<string>('all');
@@ -26,6 +28,7 @@ export default function App() {
   const [courseForEnrollment, setCourseForEnrollment] = useState<Course | null>(null);
   const [isEnrollmentOpen, setIsEnrollmentOpen] = useState<boolean>(false);
   const [isStudentPortalOpen, setIsStudentPortalOpen] = useState<boolean>(false);
+  const [isDownloadModalOpen, setIsDownloadModalOpen] = useState<boolean>(false);
   
   // Active discount applied from calculator
   const [activeDiscount, setActiveDiscount] = useState<{ percentage: number; label: string } | undefined>(undefined);
@@ -64,9 +67,16 @@ export default function App() {
       <Navbar
         onOpenStudentPortal={() => setIsStudentPortalOpen(true)}
         onOpenEnrollment={handleOpenEnrollmentGeneral}
+        onOpenDownload={() => setIsDownloadModalOpen(true)}
         onSelectCategory={(cat) => setSelectedCategory(cat)}
         searchQuery={searchQuery}
         setSearchQuery={setSearchQuery}
+      />
+
+      {/* Carrossel de Banner sobre Pós-Graduação em Direito (Abaixo da Logo) */}
+      <PosGraduacaoBannerCarousel
+        onOpenEnrollment={handleOpenEnrollmentGeneral}
+        onSelectCategory={handleFilterCourses}
       />
 
       {/* Main Content Areas */}
@@ -150,6 +160,26 @@ export default function App() {
         isOpen={isStudentPortalOpen}
         onClose={() => setIsStudentPortalOpen(false)}
       />
+
+      <DownloadPageModal
+        isOpen={isDownloadModalOpen}
+        onClose={() => setIsDownloadModalOpen(false)}
+      />
+
+      {/* Floating Download Button (Left) */}
+      <div className="fixed bottom-6 left-6 z-30 pointer-events-auto">
+        <button
+          onClick={() => setIsDownloadModalOpen(true)}
+          className="flex items-center gap-2.5 px-4 py-3 bg-[#0b1b36] hover:bg-[#12284d] text-white font-bold text-xs rounded-full shadow-2xl border border-slate-700 transition-all transform hover:scale-105 group cursor-pointer"
+          title="Baixar HTML, CSS e JavaScript desta página"
+        >
+          <div className="w-5 h-5 rounded-full bg-amber-400 text-slate-950 flex items-center justify-center">
+            <Download className="w-3 h-3 group-hover:animate-bounce" />
+          </div>
+          <span className="hidden sm:inline">Baixar Página Home (HTML/CSS/JS)</span>
+          <span className="sm:hidden">Baixar Código</span>
+        </button>
+      </div>
 
       {/* Floating Action Buttons */}
       <div className="fixed bottom-6 right-6 z-30 flex flex-col items-end gap-3 pointer-events-none">

@@ -4,14 +4,17 @@ export interface Course {
   id: string;
   title: string;
   category: CourseCategory;
+  categoryTag?: string;
   area: string;
   duration: string;
   hours: string;
   badge?: string;
+  discountBadge?: string;
   mecGrade?: number;
   coordinator: string;
   coordinatorRole: string;
   coordinatorPhoto: string;
+  cardImage?: string;
   description: string;
   syllabus: string[];
   highlights: string[];
