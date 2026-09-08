@@ -82,14 +82,6 @@ export const Navbar: React.FC<NavbarProps> = ({
               <span className="hidden sm:inline">WhatsApp Consultores</span>
             </a>
 
-            <button 
-              onClick={onOpenStudentPortal}
-              className="flex items-center gap-1 text-white hover:text-red-400 transition-colors font-medium border-l border-slate-700 pl-3 cursor-pointer"
-            >
-              <User className="w-3.5 h-3.5 text-red-500" />
-              <span>Área do Aluno</span>
-            </button>
-
             {onOpenDownload && (
               <button 
                 onClick={onOpenDownload}
@@ -177,10 +169,15 @@ export const Navbar: React.FC<NavbarProps> = ({
               )}
 
               <button
-                onClick={onOpenEnrollment}
-                className="px-5 py-2.5 rounded-lg bg-red-600 hover:bg-red-700 text-white text-xs font-bold uppercase tracking-wider shadow-md hover:shadow-lg transition-all transform hover:-translate-y-0.5 cursor-pointer whitespace-nowrap"
+                onClick={onOpenStudentPortal}
+                id="navbar-area-do-aluno"
+                className="flex items-center gap-2 text-white hover:text-red-400 transition-colors cursor-pointer py-1.5 px-3 rounded-lg group select-none"
+                title="Acessar Área do Aluno"
               >
-                Matrícula Online
+                <User className="w-5 h-5 text-red-500 stroke-[2.2] group-hover:scale-105 transition-transform" />
+                <span className="text-white font-bold text-sm tracking-tight whitespace-nowrap">
+                  Área do Aluno
+                </span>
               </button>
             </div>
 
@@ -278,21 +275,12 @@ export const Navbar: React.FC<NavbarProps> = ({
             <button
               onClick={() => {
                 setIsMobileMenuOpen(false);
-                onOpenEnrollment();
-              }}
-              className="w-full py-3 rounded-lg bg-red-600 hover:bg-red-700 text-white font-bold text-center text-sm uppercase tracking-wider"
-            >
-              Matrícula Online
-            </button>
-            <button
-              onClick={() => {
-                setIsMobileMenuOpen(false);
                 onOpenStudentPortal();
               }}
-              className="w-full py-2.5 rounded-lg border border-slate-700 bg-slate-900/60 text-slate-200 font-semibold text-center text-sm flex items-center justify-center gap-2"
+              className="w-full py-3 rounded-lg bg-slate-900/90 border border-slate-700 hover:border-red-500 text-white font-bold text-center text-sm flex items-center justify-center gap-2 transition-all cursor-pointer"
             >
-              <User className="w-4 h-4 text-red-500" />
-              Acessar Área do Aluno (SIA)
+              <User className="w-5 h-5 text-red-500 stroke-[2.2]" />
+              <span className="text-white font-bold text-sm">Área do Aluno</span>
             </button>
           </div>
         </div>
