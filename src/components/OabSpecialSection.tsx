@@ -2,7 +2,6 @@ import React from 'react';
 import { 
   ShieldCheck, 
   Target, 
-  CheckCircle, 
   BarChart3, 
   FileText, 
   Sparkles, 
@@ -119,19 +118,6 @@ export const OabSpecialSection: React.FC<OabSpecialSectionProps> = ({
                   >
                     {course.title}
                   </h4>
-
-                  <p className="text-xs text-slate-600 line-clamp-3">
-                    {course.description}
-                  </p>
-
-                  <div className="space-y-1.5 pt-2">
-                    {course.highlights.slice(0, 2).map((hl, i) => (
-                      <div key={i} className="flex items-center gap-1.5 text-xs text-slate-600">
-                        <CheckCircle className="w-3.5 h-3.5 text-emerald-500 shrink-0" />
-                        <span className="line-clamp-1">{hl}</span>
-                      </div>
-                    ))}
-                  </div>
                 </div>
 
                 <div className="pt-6 mt-6 border-t border-slate-100 flex items-center justify-between">

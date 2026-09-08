@@ -7,7 +7,6 @@ import {
   Clock, 
   Calendar, 
   Award, 
-  Check, 
   Search, 
   ArrowUpRight, 
   Sparkles,
@@ -247,22 +246,6 @@ export const CourseCatalog: React.FC<CourseCatalogProps> = ({
                     >
                       {course.title}
                     </h3>
-
-
-                    {/* Brief Description */}
-                    <p className="text-xs text-slate-300 leading-relaxed line-clamp-3">
-                      {course.description}
-                    </p>
-
-                    {/* Highlights bullet points */}
-                    <div className="space-y-1.5 pt-1">
-                      {course.highlights.slice(0, 2).map((hl, idx) => (
-                        <div key={idx} className="flex items-start gap-2 text-[11px] text-slate-300">
-                          <Check className="w-3.5 h-3.5 text-emerald-400 shrink-0 mt-0.5" />
-                          <span className="line-clamp-1">{hl}</span>
-                        </div>
-                      ))}
-                    </div>
                   </div>
                 </div>
 
