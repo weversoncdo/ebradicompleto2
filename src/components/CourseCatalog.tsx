@@ -290,7 +290,7 @@ export const CourseCatalog: React.FC<CourseCatalogProps> = ({
                       onClick={() => onSelectCourse(course)}
                       className="py-2.5 px-3 rounded-lg border border-slate-700 hover:border-slate-500 text-slate-200 font-bold text-xs text-center transition-colors hover:bg-slate-800/80 flex items-center justify-center gap-1 cursor-pointer"
                     >
-                      <span>Ver Ementa</span>
+                      <span>SAIBA MAIS</span>
                       <ArrowUpRight className="w-3.5 h-3.5" />
                     </button>
 

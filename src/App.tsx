@@ -16,6 +16,8 @@ import { Footer } from './components/Footer';
 import { EnrollmentModal } from './components/EnrollmentModal';
 import { StudentPortalModal } from './components/StudentPortalModal';
 import { DownloadPageModal } from './components/DownloadPageModal';
+import { AccessibilityMenu } from './components/AccessibilityMenu';
+import { PrivacyModal } from './components/PrivacyModal';
 import { MessageCircle, ArrowUp, Download } from 'lucide-react';
 
 export default function App() {
@@ -28,6 +30,8 @@ export default function App() {
   const [isEnrollmentOpen, setIsEnrollmentOpen] = useState<boolean>(false);
   const [isStudentPortalOpen, setIsStudentPortalOpen] = useState<boolean>(false);
   const [isDownloadModalOpen, setIsDownloadModalOpen] = useState<boolean>(false);
+  const [isAccessibilityOpen, setIsAccessibilityOpen] = useState<boolean>(false);
+  const [isPrivacyOpen, setIsPrivacyOpen] = useState<boolean>(false);
   
   // Active discount applied from calculator
   const [activeDiscount, setActiveDiscount] = useState<{ percentage: number; label: string } | undefined>(undefined);
@@ -126,6 +130,9 @@ export default function App() {
         onOpenStudentPortal={() => setIsStudentPortalOpen(true)}
         onOpenEnrollment={handleOpenEnrollmentGeneral}
         onSelectCategory={(cat) => setSelectedCategory(cat)}
+        onToggleAccessibility={() => setIsAccessibilityOpen(!isAccessibilityOpen)}
+        isAccessibilityOpen={isAccessibilityOpen}
+        onOpenPrivacy={() => setIsPrivacyOpen(true)}
       />
 
       {/* Modals */}
@@ -159,24 +166,38 @@ export default function App() {
         onClose={() => setIsDownloadModalOpen(false)}
       />
 
-      {/* Floating Download Button (Left) */}
-      <div className="fixed bottom-6 left-6 z-30 pointer-events-auto">
+      {/* Privacy & LGPD Modal */}
+      <PrivacyModal
+        isOpen={isPrivacyOpen}
+        onClose={() => setIsPrivacyOpen(false)}
+      />
+
+      {/* Accessibility Floating Menu & Trigger (Bottom Left) */}
+      <AccessibilityMenu
+        isOpen={isAccessibilityOpen}
+        onToggle={() => setIsAccessibilityOpen(!isAccessibilityOpen)}
+        onClose={() => setIsAccessibilityOpen(false)}
+        onOpenPrivacy={() => {
+          setIsAccessibilityOpen(false);
+          setIsPrivacyOpen(true);
+        }}
+      />
+
+      {/* Floating Action Buttons (Right) */}
+      <div className="fixed bottom-6 right-6 z-30 flex flex-col items-end gap-3 pointer-events-none">
+        
+        {/* Floating Download Button */}
         <button
           onClick={() => setIsDownloadModalOpen(true)}
-          className="flex items-center gap-2.5 px-4 py-3 bg-[#0b1b36] hover:bg-[#12284d] text-white font-bold text-xs rounded-full shadow-2xl border border-slate-700 transition-all transform hover:scale-105 group cursor-pointer"
+          className="pointer-events-auto flex items-center gap-2 px-4 py-2.5 bg-[#0b1b36] hover:bg-[#12284d] text-white font-bold text-xs rounded-full shadow-xl border border-slate-700 transition-all transform hover:scale-105 group cursor-pointer"
           title="Baixar HTML, CSS e JavaScript desta página"
         >
           <div className="w-5 h-5 rounded-full bg-amber-400 text-slate-950 flex items-center justify-center">
             <Download className="w-3 h-3 group-hover:animate-bounce" />
           </div>
-          <span className="hidden sm:inline">Baixar Página Home (HTML/CSS/JS)</span>
-          <span className="sm:hidden">Baixar Código</span>
+          <span className="hidden sm:inline">Baixar Código</span>
         </button>
-      </div>
 
-      {/* Floating Action Buttons */}
-      <div className="fixed bottom-6 right-6 z-30 flex flex-col items-end gap-3 pointer-events-none">
-        
         {/* Floating WhatsApp Button */}
         <a
           href="https://api.whatsapp.com/send?phone=5511999999999&text=Ol%C3%A1!%20Gostaria%20de%20tirar%20uma%20d%C3%BAvida%20sobre%20os%20cursos%20da%20EBRADI."
@@ -192,7 +213,7 @@ export default function App() {
         {/* Back to top button */}
         <button
           onClick={scrollToTop}
-          className="pointer-events-auto p-3 rounded-full bg-[#0b1b36] hover:bg-[#162f5f] text-white shadow-lg transition-transform hover:-translate-y-1"
+          className="pointer-events-auto p-3 rounded-full bg-[#0b1b36] hover:bg-[#162f5f] text-white shadow-lg transition-transform hover:-translate-y-1 cursor-pointer"
           aria-label="Voltar ao topo"
           title="Voltar ao topo"
         >

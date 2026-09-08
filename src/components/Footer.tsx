@@ -13,12 +13,18 @@ interface FooterProps {
   onOpenStudentPortal?: () => void;
   onOpenEnrollment?: () => void;
   onSelectCategory?: (category: string) => void;
+  onToggleAccessibility?: () => void;
+  isAccessibilityOpen?: boolean;
+  onOpenPrivacy?: () => void;
 }
 
 export const Footer: React.FC<FooterProps> = ({
   onOpenStudentPortal,
   onOpenEnrollment,
   onSelectCategory,
+  onToggleAccessibility,
+  isAccessibilityOpen,
+  onOpenPrivacy,
 }) => {
   const [feedbackToast, setFeedbackToast] = useState<string | null>(null);
 
@@ -442,6 +448,61 @@ export const Footer: React.FC<FooterProps> = ({
               </div>
             </div>
 
+          </div>
+
+        </div>
+      </div>
+
+      {/* Bottom Legal & Accessibility Strip (conforme imagem em anexo) */}
+      <div className="bg-[#d2d6dc] text-slate-700 py-3.5 px-4 sm:px-6 lg:px-8 border-t border-slate-300">
+        <div className="max-w-7xl mx-auto flex flex-col md:flex-row items-center justify-between gap-4">
+          
+          {/* Left: Botão de Acessibilidade copiado conforme proposto + Informações legais */}
+          <div className="flex items-center gap-3.5 sm:gap-4 w-full md:w-auto">
+            <button
+              id="accessibility-menu"
+              type="button"
+              role="button"
+              title="Abrir Menu de Acessibilidade"
+              aria-disabled="false"
+              aria-label="Abrir Menu de Acessibilidade"
+              aria-hidden="false"
+              aria-expanded={isAccessibilityOpen ? "true" : "false"}
+              onClick={onToggleAccessibility}
+              className="_11y_Button_button_3b44e   _11y_MenuIcon_icon_10c15 _11y_MenuIcon_left-bottom_010f2 false false  _11y_MenuIcon_z-index-max_0c692 _11y_Button_fadeUp_94261 w-11 h-11 sm:w-12 sm:h-12 rounded-full bg-white border border-slate-300 shadow-sm hover:shadow-md flex items-center justify-center shrink-0 hover:scale-105 transition-all cursor-pointer"
+            >
+              <div className="w-9 h-9 rounded-full flex items-center justify-center select-none">
+                <svg viewBox="0 0 100 100" className="w-8 h-8" fill="none" xmlns="http://www.w3.org/2000/svg">
+                  <circle cx="50" cy="50" r="46" stroke="#1e293b" strokeWidth="3" />
+                  <circle cx="50" cy="28" r="8" fill="#00BCD4" stroke="#0f172a" strokeWidth="2" />
+                  <line x1="22" y1="46" x2="78" y2="46" stroke="#1e293b" strokeWidth="4" strokeLinecap="round" />
+                  <line x1="50" y1="36" x2="50" y2="64" stroke="#1e293b" strokeWidth="4" strokeLinecap="round" />
+                  <line x1="50" y1="62" x2="26" y2="82" stroke="#1e293b" strokeWidth="4" strokeLinecap="round" />
+                  <line x1="50" y1="62" x2="74" y2="82" stroke="#1e293b" strokeWidth="4" strokeLinecap="round" />
+                  <circle cx="22" cy="46" r="3.5" fill="#00BCD4" />
+                  <circle cx="78" cy="46" r="3.5" fill="#00BCD4" />
+                  <circle cx="26" cy="82" r="3.5" fill="#00BCD4" />
+                  <circle cx="74" cy="82" r="3.5" fill="#00BCD4" />
+                </svg>
+              </div>
+            </button>
+
+            <div className="text-[11px] sm:text-xs text-slate-700 leading-snug">
+              <p className="font-semibold text-slate-800">Escola Brasileira de Direito.</p>
+              <p>CNPJ 05.648.257/0031-93 - Rua Taquari, 546 - Mooca, São Paulo/SP - CEP 03166-000</p>
+              <p>© Copyright 2026 EBRADI. Todos os direitos reservados.</p>
+            </div>
+          </div>
+
+          {/* Right: Canal de Privacidade */}
+          <div className="flex items-center gap-4 text-xs font-medium self-end md:self-center shrink-0">
+            <button
+              type="button"
+              onClick={onOpenPrivacy}
+              className="text-slate-700 hover:text-slate-950 transition-colors underline cursor-pointer"
+            >
+              Canal de Privacidade
+            </button>
           </div>
 
         </div>
