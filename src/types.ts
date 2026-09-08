@@ -35,6 +35,7 @@ export interface FacultyMember {
   specialities: string[];
   notableWorks: string[];
   quote?: string;
+  area?: string;
 }
 
 export interface Testimonial {

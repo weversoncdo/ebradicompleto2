@@ -191,7 +191,27 @@ export const PosGraduacaoBannerCarousel: React.FC<PosGraduacaoBannerCarouselProp
         <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_top_right,_var(--tw-gradient-stops))] from-amber-500/10 via-transparent to-black/60 pointer-events-none" />
       </div>
 
-      <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8 sm:py-12 lg:py-16">
+      {/* Lateral Navigation Arrow - Left */}
+      <button
+        onClick={prevSlide}
+        className="absolute left-2 sm:left-4 lg:left-6 top-1/2 -translate-y-1/2 z-30 w-10 h-10 sm:w-12 sm:h-12 rounded-full bg-[#0a182f]/90 hover:bg-[#112444] border border-slate-700/80 text-white flex items-center justify-center transition-all duration-200 shadow-2xl hover:scale-105 active:scale-95 cursor-pointer backdrop-blur-sm group"
+        aria-label="Banner anterior"
+        title="Banner anterior"
+      >
+        <ChevronLeft className="w-5 h-5 sm:w-6 sm:h-6 text-white group-hover:-translate-x-0.5 transition-transform" />
+      </button>
+
+      {/* Lateral Navigation Arrow - Right */}
+      <button
+        onClick={nextSlide}
+        className="absolute right-2 sm:right-4 lg:right-6 top-1/2 -translate-y-1/2 z-30 w-10 h-10 sm:w-12 sm:h-12 rounded-full bg-[#0a182f]/90 hover:bg-[#112444] border border-slate-700/80 text-white flex items-center justify-center transition-all duration-200 shadow-2xl hover:scale-105 active:scale-95 cursor-pointer backdrop-blur-sm group"
+        aria-label="Próximo banner"
+        title="Próximo banner"
+      >
+        <ChevronRight className="w-5 h-5 sm:w-6 sm:h-6 text-white group-hover:translate-x-0.5 transition-transform" />
+      </button>
+
+      <div className="relative z-10 max-w-7xl mx-auto px-8 sm:px-14 lg:px-16 py-8 sm:py-12 lg:py-16">
         
         {/* Top Carousel Navigation Tabs (Quick Select) */}
         <div className="hidden md:flex items-center gap-2 mb-6 overflow-x-auto pb-2 scrollbar-none">
@@ -353,49 +373,25 @@ export const PosGraduacaoBannerCarousel: React.FC<PosGraduacaoBannerCarouselProp
 
         </div>
 
-        {/* Carousel Navigation Controls (Arrows & Dots) */}
-        <div className="mt-8 pt-4 border-t border-slate-800/80 flex items-center justify-between">
-          
-          {/* Slide Indicator Dots */}
-          <div className="flex items-center gap-2">
+        {/* Carousel Navigation Indicators (Centralizado Embaixo do Banner) */}
+        <div className="mt-8 pt-4 border-t border-slate-800/80 flex items-center justify-center">
+          <div className="flex items-center gap-2.5 bg-slate-950/40 px-4 py-2 rounded-full border border-slate-800/60 backdrop-blur-xs">
             {SLIDES.map((_, idx) => (
               <button
                 key={idx}
                 onClick={() => setCurrentSlide(idx)}
-                className={`transition-all cursor-pointer rounded-full ${
+                className={`transition-all duration-300 cursor-pointer ${
                   idx === currentSlide
-                    ? 'w-8 h-2.5 bg-red-600'
-                    : 'w-2.5 h-2.5 bg-slate-700 hover:bg-slate-500'
+                    ? 'w-9 sm:w-10 h-3 bg-red-600 rounded-full shadow-sm shadow-red-600/50'
+                    : 'w-3 h-3 bg-[#3d4b60] hover:bg-slate-400 rounded-full'
                 }`}
                 aria-label={`Ir para banner ${idx + 1}`}
               />
             ))}
-            <span className="ml-3 text-xs text-slate-400 font-medium">
+            <span className="ml-3 text-xs sm:text-sm text-slate-300 font-semibold tracking-wide">
               {currentSlide + 1} de {slideCount}
             </span>
           </div>
-
-          {/* Prev / Next Arrows */}
-          <div className="flex items-center gap-2">
-            <button
-              onClick={prevSlide}
-              className="p-2.5 rounded-full bg-slate-900/90 hover:bg-slate-800 border border-slate-700 text-white transition-all hover:scale-105 cursor-pointer shadow-md"
-              aria-label="Banner anterior"
-              title="Banner anterior"
-            >
-              <ChevronLeft className="w-5 h-5" />
-            </button>
-
-            <button
-              onClick={nextSlide}
-              className="p-2.5 rounded-full bg-slate-900/90 hover:bg-slate-800 border border-slate-700 text-white transition-all hover:scale-105 cursor-pointer shadow-md"
-              aria-label="Próximo banner"
-              title="Próximo banner"
-            >
-              <ChevronRight className="w-5 h-5" />
-            </button>
-          </div>
-
         </div>
 
       </div>
