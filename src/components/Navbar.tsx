@@ -150,18 +150,6 @@ export const Navbar: React.FC<NavbarProps> = ({
               >
                 Metodologia
               </button>
-              <button 
-                onClick={() => handleNavClick('bolsas-section')} 
-                className="hover:text-amber-300 transition-colors cursor-pointer text-amber-400 font-bold"
-              >
-                Simulador de Bolsas
-              </button>
-              <button 
-                onClick={() => handleNavClick('artigos-section')} 
-                className="hover:text-red-400 transition-colors cursor-pointer"
-              >
-                Artigos & Notícias
-              </button>
             </nav>
 
             {/* Actions & Search */}
@@ -270,20 +258,6 @@ export const Navbar: React.FC<NavbarProps> = ({
               className="text-left py-2.5 px-3 rounded-md hover:bg-slate-800 hover:text-white flex items-center justify-between"
             >
               <span>Metodologia EBRADI</span>
-              <ChevronRight className="w-4 h-4 text-slate-400" />
-            </button>
-            <button 
-              onClick={() => handleNavClick('bolsas-section')} 
-              className="text-left py-2.5 px-3 rounded-md bg-amber-500/10 text-amber-400 border border-amber-500/30 font-bold flex items-center justify-between"
-            >
-              <span>Simulador de Bolsas & Descontos</span>
-              <ChevronRight className="w-4 h-4 text-amber-400" />
-            </button>
-            <button 
-              onClick={() => handleNavClick('artigos-section')} 
-              className="text-left py-2.5 px-3 rounded-md hover:bg-slate-800 hover:text-white flex items-center justify-between"
-            >
-              <span>Artigos e Notícias Jurídicas</span>
               <ChevronRight className="w-4 h-4 text-slate-400" />
             </button>
           </nav>

@@ -3,7 +3,6 @@ import { Course } from './types';
 import { COURSES } from './data/courses';
 import { Navbar } from './components/Navbar';
 import { PosGraduacaoBannerCarousel } from './components/PosGraduacaoBannerCarousel';
-import { HeroSection } from './components/HeroSection';
 import { CourseCatalog } from './components/CourseCatalog';
 import { CourseDetailModal } from './components/CourseDetailModal';
 import { PatronosSection } from './components/PatronosSection';
@@ -82,13 +81,7 @@ export default function App() {
       {/* Main Content Areas */}
       <main className="flex-1">
         
-        {/* 1. Hero Section with Quick Course Simulator */}
-        <HeroSection
-          onOpenEnrollment={handleOpenEnrollmentGeneral}
-          onFilterCourses={handleFilterCourses}
-        />
-
-        {/* 2. Interactive Course Catalog */}
+        {/* Interactive Course Catalog */}
         <CourseCatalog
           selectedCategory={selectedCategory}
           onSelectCategory={(cat) => setSelectedCategory(cat)}
