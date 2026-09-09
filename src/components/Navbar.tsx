@@ -77,8 +77,7 @@ export const Navbar: React.FC<NavbarProps> = ({
               <button 
                 onClick={onOpenDownload}
                 className="flex items-center gap-1.5 text-amber-300 hover:text-white transition-colors font-bold border-l border-slate-700 pl-3 cursor-pointer"
-                title="Baixar código HTML, CSS e JS desta página" style="
-    display: none;"
+                title="Baixar código HTML, CSS e JS desta página"
               >
                 <Download className="w-3.5 h-3.5 text-amber-400" />
                 <span>Baixar Código da Home</span>
@@ -153,8 +152,7 @@ export const Navbar: React.FC<NavbarProps> = ({
                 <button
                   onClick={onOpenDownload}
                   className="px-3.5 py-2 rounded-lg border border-amber-400/60 hover:border-amber-400 text-amber-300 hover:text-white hover:bg-amber-400/10 text-xs font-bold transition-all flex items-center gap-1.5 cursor-pointer shadow-xs whitespace-nowrap"
-                  title="Baixar código HTML, CSS e JS desta página" style="
-    display: none;"
+                  title="Baixar código HTML, CSS e JS desta página"
                 >
                   <Download className="w-3.5 h-3.5 text-amber-400" />
                   <span>Baixar Código</span>
@@ -271,8 +269,7 @@ export const Navbar: React.FC<NavbarProps> = ({
                 className="w-full py-2.5 rounded-lg border border-amber-500/50 bg-amber-500/10 text-amber-300 font-bold text-center text-sm flex items-center justify-center gap-2"
               >
                 <Download className="w-4 h-4 text-amber-400" />
-                <span>Baixar Código da Home (HTML/CSS/JS) style="
-    display: none;"</span>
+                <span>Baixar Código da Home (HTML/CSS/JS)</span>
               </button>
             )}
             <button
