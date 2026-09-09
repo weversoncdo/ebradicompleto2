@@ -454,14 +454,14 @@ export const Footer: React.FC<FooterProps> = ({
       </div>
 
       {/* Bottom Legal Strip (conforme solicitação) */}
-      <div className="bg-[#d2d6dc] text-slate-700 py-3.5 px-4 sm:px-6 lg:px-8 border-t border-slate-300">
+      <div className="bg-[#0f172b] text-slate-300 py-4 px-4 sm:px-6 lg:px-8 border-t border-slate-800">
         <div className="max-w-7xl mx-auto flex flex-col md:flex-row items-center justify-between gap-4">
           
           {/* Left: Informações legais da EBRADI */}
-          <div className="text-[11px] sm:text-xs text-slate-700 leading-snug">
-            <p className="font-semibold text-slate-800">Escola Brasileira de Direito.</p>
-            <p>CNPJ 05.648.257/0031-93 - Rua Taquari, 546 - Mooca, São Paulo/SP - CEP 03166-000</p>
-            <p>© Copyright 2026 EBRADI. Todos os direitos reservados.</p>
+          <div className="text-[11px] sm:text-xs text-slate-300 leading-snug">
+            <p className="font-semibold text-white">Escola Brasileira de Direito.</p>
+            <p className="text-slate-400">CNPJ 05.648.257/0031-93 - Rua Taquari, 546 - Mooca, São Paulo/SP - CEP 03166-000</p>
+            <p className="text-slate-400">© Copyright 2026 EBRADI. Todos os direitos reservados.</p>
           </div>
 
           {/* Right: Canal de Privacidade */}
@@ -469,7 +469,7 @@ export const Footer: React.FC<FooterProps> = ({
             <button
               type="button"
               onClick={onOpenPrivacy}
-              className="text-slate-700 hover:text-slate-950 transition-colors underline cursor-pointer"
+              className="text-slate-300 hover:text-white transition-colors underline cursor-pointer"
             >
               Canal de Privacidade
             </button>
