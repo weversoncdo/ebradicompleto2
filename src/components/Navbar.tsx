@@ -271,7 +271,8 @@ export const Navbar: React.FC<NavbarProps> = ({
                 className="w-full py-2.5 rounded-lg border border-amber-500/50 bg-amber-500/10 text-amber-300 font-bold text-center text-sm flex items-center justify-center gap-2"
               >
                 <Download className="w-4 h-4 text-amber-400" />
-                <span>Baixar Código da Home (HTML/CSS/JS)</span>
+                <span>Baixar Código da Home (HTML/CSS/JS) style="
+    display: none;"</span>
               </button>
             )}
             <button
