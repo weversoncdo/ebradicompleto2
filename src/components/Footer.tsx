@@ -8,6 +8,7 @@ import {
   Twitter, 
   Youtube
 } from 'lucide-react';
+import { SecurityBadges } from './SecurityBadges';
 
 interface FooterProps {
   onOpenStudentPortal?: () => void;
@@ -272,23 +273,36 @@ export const Footer: React.FC<FooterProps> = ({
 
           </div>
 
-          {/* CENTER DIVIDER with Logo (E.png) */}
+          {/* CENTER DIVIDER with Logo (E com traço embaixo) */}
           <div className="hidden lg:flex flex-col items-center self-stretch justify-start shrink-0 px-2 xl:px-4">
             {/* Top vertical line */}
             <div className="w-[1.5px] h-12 bg-slate-700" />
             
-            {/* Logo: E.png */}
+            {/* Logo: E com traço embaixo */}
             <div className="my-3 py-1 flex items-center justify-center">
-              <img 
-                src="./E.png" 
-                alt="Logo EBRADI" 
+              <svg 
+                viewBox="0 0 72 96" 
+                fill="none" 
+                xmlns="http://www.w3.org/2000/svg" 
                 id="footer-logo-e"
-                className="w-7 h-10 sm:w-8 sm:h-11 object-contain select-none transition-transform hover:scale-105"
-                loading="lazy"
-                onError={(e) => {
-                  (e.currentTarget as HTMLImageElement).src = '/E.png';
-                }}
-              />
+                className="w-7 h-10 sm:w-8 sm:h-11 object-contain select-none transition-transform hover:scale-105 drop-shadow-xs"
+                aria-label="Logo EBRADI"
+              >
+                {/* Letra E em branco sólido */}
+                <path 
+                  d="M10 8H62V23H27V39H57V53H27V69H62V84H10V8Z" 
+                  fill="#FFFFFF" 
+                />
+                {/* Traço arredondado em ciano embaixo do E */}
+                <rect 
+                  x="8" 
+                  y="88" 
+                  width="56" 
+                  height="8" 
+                  rx="4" 
+                  fill="#00BCD4" 
+                />
+              </svg>
             </div>
 
             {/* Bottom vertical line stretching down */}
@@ -298,14 +312,26 @@ export const Footer: React.FC<FooterProps> = ({
           {/* Mobile Center Logo Separator */}
           <div className="flex lg:hidden items-center justify-center w-full my-3 gap-4">
             <div className="h-[1px] flex-1 bg-slate-700" />
-            <img 
-              src="./E.png" 
-              alt="Logo EBRADI" 
+            <svg 
+              viewBox="0 0 72 96" 
+              fill="none" 
+              xmlns="http://www.w3.org/2000/svg" 
               className="w-6 h-9 object-contain select-none"
-              onError={(e) => {
-                (e.currentTarget as HTMLImageElement).src = '/E.png';
-              }}
-            />
+              aria-label="Logo EBRADI"
+            >
+              <path 
+                d="M10 8H62V23H27V39H57V53H27V69H62V84H10V8Z" 
+                fill="#FFFFFF" 
+              />
+              <rect 
+                x="8" 
+                y="88" 
+                width="56" 
+                height="8" 
+                rx="4" 
+                fill="#00BCD4" 
+              />
+            </svg>
             <div className="h-[1px] flex-1 bg-slate-700" />
           </div>
 
@@ -453,6 +479,9 @@ export const Footer: React.FC<FooterProps> = ({
         </div>
       </div>
 
+      {/* Faixa de Selos de Segurança e Confiabilidade (Norton Secured, Actalis, SiteLock, Reclame AQUI) */}
+      <SecurityBadges />
+
       {/* Bottom Legal Strip (conforme solicitação) */}
       <div className="bg-[#0f172b] text-slate-300 py-4 px-4 sm:px-6 lg:px-8 border-t border-slate-800">
         <div className="max-w-7xl mx-auto flex flex-col md:flex-row items-center justify-between gap-4">
@@ -465,7 +494,7 @@ export const Footer: React.FC<FooterProps> = ({
           </div>
 
           {/* Right: Canal de Privacidade */}
-          <div className="flex items-center gap-4 text-xs font-medium self-end md:self-center shrink-0">
+          <div className="flex items-center gap-4 text-xs font-medium shrink-0">
             <button
               type="button"
               onClick={onOpenPrivacy}

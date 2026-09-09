@@ -116,7 +116,7 @@ export const ScholarshipCalculator: React.FC<ScholarshipCalculatorProps> = ({
                 >
                   {COURSES.map(course => (
                     <option key={course.id} value={course.id} className="bg-slate-900 text-white">
-                      {course.title} ({course.category === 'pos' ? 'Pós-Graduação' : course.category === 'oab' ? 'OAB' : 'Extensão'})
+                      {course.title} ({course.category === 'pos' ? 'Pós-Graduação' : course.category === 'oab' ? 'OAB' : 'Curso Livre'})
                     </option>
                   ))}
                 </select>

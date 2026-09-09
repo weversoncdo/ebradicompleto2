@@ -39,7 +39,7 @@ export const CourseCatalog: React.FC<CourseCatalogProps> = ({
     { id: 'all', label: 'Todos os Cursos', count: COURSES.length },
     { id: 'pos', label: 'Pós-Graduação (Nota 5 MEC)', count: COURSES.filter(c => c.category === 'pos').length },
     { id: 'oab', label: 'Preparatório OAB', count: COURSES.filter(c => c.category === 'oab').length },
-    { id: 'extensao', label: 'Extensão & Prática', count: COURSES.filter(c => c.category === 'extensao').length },
+    { id: 'extensao', label: 'Curso Livre', count: COURSES.filter(c => c.category === 'extensao').length },
     { id: 'digital', label: 'Direito Digital & IA', count: COURSES.filter(c => c.category === 'digital').length },
   ];
 

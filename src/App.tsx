@@ -115,7 +115,7 @@ export default function App() {
         />
 
         {/* 7. Depoimentos e Casos de Sucesso */}
-        <TestimonialsSection />
+        <TestimonialsSection onOpenTerms={() => setIsPrivacyOpen(true)} />
 
         {/* 8. Artigos Jurídicos e Atualizações */}
         <ArticlesSection />

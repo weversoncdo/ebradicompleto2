@@ -128,7 +128,7 @@ export const Navbar: React.FC<NavbarProps> = ({
                 onClick={() => handleNavClick('cursos-section', 'extensao')} 
                 className="hover:text-red-400 transition-colors cursor-pointer"
               >
-                Extensão & Prática
+                Curso Livre
               </button>
               <button 
                 onClick={() => handleNavClick('patronos-section')} 
@@ -240,7 +240,7 @@ export const Navbar: React.FC<NavbarProps> = ({
               onClick={() => handleNavClick('cursos-section', 'extensao')} 
               className="text-left py-2.5 px-3 rounded-md hover:bg-slate-800 hover:text-white flex items-center justify-between"
             >
-              <span>Cursos de Extensão & Prática</span>
+              <span>Cursos Livres</span>
               <ChevronRight className="w-4 h-4 text-slate-400" />
             </button>
             <button 

@@ -1,9 +1,13 @@
 import React, { useState } from 'react';
 import { TESTIMONIALS } from '../data/testimonials';
 import { Star, Award, CheckCircle2, MessageSquareQuote, ThumbsUp, Sparkles, UserCheck } from 'lucide-react';
-import { SecuritySealsBar } from './SecuritySealsBar';
+import { NewsletterSection } from './NewsletterSection';
 
-export const TestimonialsSection: React.FC = () => {
+interface TestimonialsSectionProps {
+  onOpenTerms?: () => void;
+}
+
+export const TestimonialsSection: React.FC<TestimonialsSectionProps> = ({ onOpenTerms }) => {
   const [activeFilter, setActiveFilter] = useState<string>('todos');
 
   const filteredTestimonials = activeFilter === 'todos'
@@ -139,8 +143,8 @@ export const TestimonialsSection: React.FC = () => {
           ))}
         </div>
 
-        {/* Security Seals Trust Banner (Norton Secured, Actalis, SiteLock) */}
-        <SecuritySealsBar className="mt-14" />
+        {/* Newsletter Curadoria Jurídica (substitui a div de selos de segurança) */}
+        <NewsletterSection className="mt-12 sm:mt-16" onOpenTerms={onOpenTerms} />
 
       </div>
 

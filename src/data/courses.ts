@@ -25,7 +25,7 @@ export const COURSES: Course[] = [
     highlights: [
       'Análise prática de casos verídicos julgados pelos Tribunais',
       'Modelos de peças estratégicas prontas e editáveis',
-      'Certificado de extensão prático-profissional'
+      'Certificado de curso livre prático-profissional'
     ],
     originalPrice: 199.00,
     promotionalPrice: 129.35,
@@ -340,9 +340,9 @@ export const COURSES: Course[] = [
   },
   {
     id: 'extensao-ia-juridica',
-    title: 'Extensão: Inteligência Artificial e Ferramentas Práticas para Advogados',
+    title: 'Curso Livre: Inteligência Artificial e Ferramentas Práticas para Advogados',
     category: 'extensao',
-    categoryTag: 'EXTENSÃO IA',
+    categoryTag: 'CURSO LIVRE IA',
     area: 'Inovação e Legal Tech',
     duration: '2 meses',
     hours: '60 horas',
@@ -362,7 +362,7 @@ export const COURSES: Course[] = [
     ],
     highlights: [
       'Templates de prompts jurídicos prontos para uso imediato',
-      'Certificado de extensão universitária',
+      'Certificado de curso livre universitário',
       'Aplicabilidade real com ganho comprovado de produtividade'
     ],
     originalPrice: 180.00,
@@ -372,7 +372,7 @@ export const COURSES: Course[] = [
   },
   {
     id: 'extensao-pratica-audiencias',
-    title: 'Extensão: Prática em Audiências Cíveis e Técnicas de Sustentação Oral',
+    title: 'Curso Livre: Prática em Audiências Cíveis e Técnicas de Sustentação Oral',
     category: 'extensao',
     categoryTag: 'PRÁTICA FORENSE',
     area: 'Prática Forense',
