@@ -74,7 +74,7 @@ export const Navbar: React.FC<NavbarProps> = ({
             </a>
 
             {onOpenDownload && (
-              <button style="display:none;"
+              <button 
                 onClick={onOpenDownload}
                 className="flex items-center gap-1.5 text-amber-300 hover:text-white transition-colors font-bold border-l border-slate-700 pl-3 cursor-pointer"
                 title="Baixar código HTML, CSS e JS desta página"
