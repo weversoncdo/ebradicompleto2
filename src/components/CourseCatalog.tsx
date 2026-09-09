@@ -36,23 +36,43 @@ export const CourseCatalog: React.FC<CourseCatalogProps> = ({
   const [selectedAreaFilter, setSelectedAreaFilter] = useState<string>('all');
 
   const categories: { id: string; label: string; count: number }[] = [
-    { id: 'all', label: 'Todos os Cursos', count: COURSES.length },
-    { id: 'pos', label: 'Pós-Graduação (Nota 5 MEC)', count: COURSES.filter(c => c.category === 'pos').length },
-    { id: 'oab', label: 'Preparatório OAB', count: COURSES.filter(c => c.category === 'oab').length },
-    { id: 'extensao', label: 'Curso Livre', count: COURSES.filter(c => c.category === 'extensao').length },
-    { id: 'digital', label: 'Direito Digital & IA', count: COURSES.filter(c => c.category === 'digital').length },
+    { id: 'pos', label: 'PÓS-GRADUAÇÃO', count: COURSES.filter(c => c.category === 'pos').length },
+    { id: 'master-class', label: 'PÓS-GRADUAÇÃO MASTER CLASS', count: COURSES.filter(c => c.category === 'master-class').length },
+    { id: 'mba', label: 'MBA', count: COURSES.filter(c => c.category === 'mba').length },
+    { id: 'essentials', label: 'EBRADI ESSENTIALS', count: COURSES.filter(c => c.category === 'essentials').length },
+    { id: 'cursos-livres', label: 'CURSOS LIVRES', count: COURSES.filter(c => c.category === 'cursos-livres' || c.category === 'extensao').length },
+    { id: 'internacional', label: 'INTERNACIONAL', count: COURSES.filter(c => c.category === 'internacional').length },
+    { id: 'experience', label: 'EBRADI EXPERIENCE', count: COURSES.filter(c => c.category === 'experience').length },
+    { id: 'start', label: 'START EBRADI', count: COURSES.filter(c => c.category === 'start').length },
+    { id: 'oab', label: 'PREPARATÓRIO OAB', count: COURSES.filter(c => c.category === 'oab').length },
   ];
+
+  const activeCategoryId = useMemo(() => {
+    if (categories.some(c => c.id === selectedCategory)) {
+      return selectedCategory;
+    }
+    // Mapping for legacy or external callers
+    if (selectedCategory === 'extensao') return 'cursos-livres';
+    if (selectedCategory === 'digital') return 'master-class';
+    return 'pos';
+  }, [selectedCategory, categories]);
 
   const uniqueAreas = useMemo(() => {
     const areas = new Set<string>();
-    COURSES.forEach(c => areas.add(c.area));
+    const currentCatCourses = COURSES.filter(c => 
+      c.category === activeCategoryId || 
+      (activeCategoryId === 'cursos-livres' && c.category === 'extensao')
+    );
+    currentCatCourses.forEach(c => areas.add(c.area));
     return Array.from(areas);
-  }, []);
+  }, [activeCategoryId]);
 
   const filteredCourses = useMemo(() => {
     return COURSES.filter(course => {
       // Category check
-      const matchesCategory = selectedCategory === 'all' || course.category === selectedCategory;
+      const matchesCategory = 
+        course.category === activeCategoryId || 
+        (activeCategoryId === 'cursos-livres' && course.category === 'extensao');
       
       // Area check
       const matchesArea = selectedAreaFilter === 'all' || course.area === selectedAreaFilter;
@@ -67,7 +87,7 @@ export const CourseCatalog: React.FC<CourseCatalogProps> = ({
 
       return matchesCategory && matchesArea && matchesQuery;
     });
-  }, [selectedCategory, selectedAreaFilter, searchQuery]);
+  }, [activeCategoryId, selectedAreaFilter, searchQuery]);
 
   return (
     <section id="cursos-section" className="py-16 lg:py-24 bg-slate-50 border-b border-slate-200">
@@ -89,25 +109,26 @@ export const CourseCatalog: React.FC<CourseCatalogProps> = ({
           </p>
         </div>
 
-        {/* Category Tabs */}
-        <div className="flex items-center justify-start sm:justify-center overflow-x-auto pb-4 gap-2 no-scrollbar">
+        {/* Category Tabs - Somente os 9 cursos solicitados */}
+        <div className="flex items-center justify-start lg:justify-center overflow-x-auto pb-4 gap-2 sm:gap-2.5 no-scrollbar scroll-smooth">
           {categories.map((tab) => {
-            const isActive = selectedCategory === tab.id;
+            const isActive = activeCategoryId === tab.id;
             return (
               <button
                 key={tab.id}
+                id={`cat-tab-${tab.id}`}
                 onClick={() => {
                   onSelectCategory(tab.id);
                   setSelectedAreaFilter('all');
                 }}
-                className={`px-4 py-2.5 rounded-xl text-xs sm:text-sm font-semibold whitespace-nowrap transition-all flex items-center gap-2 cursor-pointer shadow-sm ${
+                className={`px-4 py-2.5 rounded-xl text-xs sm:text-sm font-bold whitespace-nowrap transition-all flex items-center gap-2 cursor-pointer shadow-xs ${
                   isActive
-                    ? 'bg-[#0b1b36] text-white shadow-md'
+                    ? 'bg-[#0b1b36] text-white shadow-md ring-2 ring-slate-800'
                     : 'bg-white text-slate-700 border border-slate-200 hover:bg-slate-100 hover:text-slate-900'
                 }`}
               >
                 <span>{tab.label}</span>
-                <span className={`px-1.5 py-0.2 rounded-full text-[10px] font-bold ${
+                <span className={`px-2 py-0.5 rounded-full text-[11px] font-bold ${
                   isActive ? 'bg-red-600 text-white' : 'bg-slate-100 text-slate-600'
                 }`}>
                   {tab.count}
@@ -177,7 +198,7 @@ export const CourseCatalog: React.FC<CourseCatalogProps> = ({
               onClick={() => {
                 setSearchQuery('');
                 setSelectedAreaFilter('all');
-                onSelectCategory('all');
+                onSelectCategory('pos');
               }}
               className="px-4 py-2 bg-slate-800 text-white text-xs font-semibold rounded-lg hover:bg-slate-700 transition-colors"
             >

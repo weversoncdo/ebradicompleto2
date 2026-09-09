@@ -1,4 +1,15 @@
-export type CourseCategory = 'pos' | 'oab' | 'extensao' | 'digital';
+export type CourseCategory = 
+  | 'pos'
+  | 'master-class'
+  | 'mba'
+  | 'essentials'
+  | 'cursos-livres'
+  | 'internacional'
+  | 'experience'
+  | 'start'
+  | 'oab'
+  | 'extensao'
+  | 'digital';
 
 export interface Course {
   id: string;

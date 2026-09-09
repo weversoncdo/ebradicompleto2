@@ -21,7 +21,7 @@ import { PrivacyModal } from './components/PrivacyModal';
 import { MessageCircle, ArrowUp, Download } from 'lucide-react';
 
 export default function App() {
-  const [selectedCategory, setSelectedCategory] = useState<string>('all');
+  const [selectedCategory, setSelectedCategory] = useState<string>('pos');
   const [searchQuery, setSearchQuery] = useState<string>('');
   
   // Modals

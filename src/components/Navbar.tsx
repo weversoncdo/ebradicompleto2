@@ -1,7 +1,6 @@
 import React, { useState } from 'react';
 import { 
-  Phone, 
-  MessageCircle, 
+  Headset,
   User, 
   Search, 
   Menu, 
@@ -64,22 +63,14 @@ export const Navbar: React.FC<NavbarProps> = ({
 
           <div className="flex items-center gap-4 text-slate-300">
             <a 
-              href="tel:08000069000" 
-              className="flex items-center gap-1 hover:text-white transition-colors"
-              title="Central de Atendimento"
-            >
-              <Phone className="w-3.5 h-3.5 text-red-400" />
-              <span>0800 006 9000</span>
-            </a>
-
-            <a 
-              href="https://api.whatsapp.com/send?phone=5511999999999&text=Ol%C3%A1!%20Gostaria%20de%20informa%C3%A7%C3%B5es%20sobre%20os%20cursos%20da%20EBRADI." 
+              href="https://api.whatsapp.com/send?phone=551140071192&text=Ol%C3%A1!%20Sou%20aluno%20da%20EBRADI%20e%20gostaria%20de%20atendimento." 
               target="_blank" 
               rel="noopener noreferrer"
-              className="flex items-center gap-1 hover:text-emerald-400 transition-colors"
+              className="flex items-center gap-1.5 text-slate-200 hover:text-emerald-400 transition-colors font-medium text-xs cursor-pointer"
+              title="Atendimento para Alunos"
             >
-              <MessageCircle className="w-3.5 h-3.5 text-emerald-400" />
-              <span className="hidden sm:inline">WhatsApp Consultores</span>
+              <Headset className="w-3.5 h-3.5 text-emerald-400" />
+              <span>Atendimento para Alunos</span>
             </a>
 
             {onOpenDownload && (
@@ -112,10 +103,10 @@ export const Navbar: React.FC<NavbarProps> = ({
             {/* Desktop Navigation Links */}
             <nav className="hidden lg:flex items-center gap-6 xl:gap-7 text-sm font-semibold text-slate-100">
               <button 
-                onClick={() => handleNavClick('cursos-section', 'pos')} 
+                onClick={() => handleNavClick('cursos-section')} 
                 className="hover:text-red-400 transition-colors cursor-pointer flex items-center gap-1"
               >
-                Pós-Graduação
+                Nossos Cursos
                 <span className="w-1.5 h-1.5 rounded-full bg-red-500 inline-block"></span>
               </button>
               <button 
@@ -125,10 +116,10 @@ export const Navbar: React.FC<NavbarProps> = ({
                 Preparatório OAB
               </button>
               <button 
-                onClick={() => handleNavClick('cursos-section', 'extensao')} 
+                onClick={() => handleNavClick('artigos-section')} 
                 className="hover:text-red-400 transition-colors cursor-pointer"
               >
-                Curso Livre
+                Blog
               </button>
               <button 
                 onClick={() => handleNavClick('patronos-section')} 
@@ -223,10 +214,10 @@ export const Navbar: React.FC<NavbarProps> = ({
         <div className="lg:hidden border-t border-slate-800 bg-[#0b1b36] px-4 pt-3 pb-6 space-y-3 shadow-2xl">
           <nav className="flex flex-col space-y-2 text-sm font-semibold text-slate-200">
             <button 
-              onClick={() => handleNavClick('cursos-section', 'pos')} 
+              onClick={() => handleNavClick('cursos-section')} 
               className="text-left py-2.5 px-3 rounded-md hover:bg-slate-800 hover:text-white flex items-center justify-between"
             >
-              <span>Pós-Graduação (Nota 5 MEC)</span>
+              <span>Nossos Cursos</span>
               <ChevronRight className="w-4 h-4 text-slate-400" />
             </button>
             <button 
@@ -237,10 +228,10 @@ export const Navbar: React.FC<NavbarProps> = ({
               <ChevronRight className="w-4 h-4 text-slate-400" />
             </button>
             <button 
-              onClick={() => handleNavClick('cursos-section', 'extensao')} 
+              onClick={() => handleNavClick('artigos-section')} 
               className="text-left py-2.5 px-3 rounded-md hover:bg-slate-800 hover:text-white flex items-center justify-between"
             >
-              <span>Cursos Livres</span>
+              <span>Blog</span>
               <ChevronRight className="w-4 h-4 text-slate-400" />
             </button>
             <button 
@@ -260,6 +251,15 @@ export const Navbar: React.FC<NavbarProps> = ({
           </nav>
 
           <div className="pt-3 border-t border-slate-800 flex flex-col gap-2">
+            <a
+              href="https://api.whatsapp.com/send?phone=551140071192&text=Ol%C3%A1!%20Sou%20aluno%20da%20EBRADI%20e%20gostaria%20de%20atendimento."
+              target="_blank"
+              rel="noopener noreferrer"
+              className="w-full py-2.5 rounded-lg border border-slate-700 bg-slate-800/60 hover:bg-slate-800 text-slate-200 hover:text-emerald-400 font-medium text-center text-xs flex items-center justify-center gap-2 transition-colors"
+            >
+              <Headset className="w-4 h-4 text-emerald-400" />
+              <span>Atendimento para Alunos</span>
+            </a>
             {onOpenDownload && (
               <button
                 onClick={() => {
