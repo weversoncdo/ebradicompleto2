@@ -1,0 +1,47 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 380 90" fill="none" className="ebradi-logo">
+  <defs>
+    <linearGradient id="goldGradient" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#DEB371"/>
+      <stop offset="50%" stop-color="#C59B5F"/>
+      <stop offset="100%" stop-color="#A67B40"/>
+    </linearGradient>
+  </defs>
+
+  <!-- Cyan underline under the letter E -->
+  <rect x="6" y="70" width="46" height="9" rx="4.5" fill="#00A3C4"/>
+
+  <!-- EBRADI Text (Navy for light backgrounds) -->
+  <text 
+    x="6" 
+    y="60" 
+    font-family="'Plus Jakarta Sans', 'Montserrat', 'Inter', -apple-system, sans-serif" 
+    font-weight="800" 
+    font-size="52" 
+    letter-spacing="-1" 
+    fill="#081A36"
+  >EBRADI</text>
+
+  <!-- 10 Numeral in Gold Serif -->
+  <g transform="translate(245, 0)">
+    <text 
+      x="0" 
+      y="66" 
+      font-family="'Playfair Display', 'Cinzel', 'Didot', 'Bodoni MT', Georgia, serif" 
+      font-style="italic" 
+      font-weight="700" 
+      font-size="82" 
+      fill="url(#goldGradient)"
+    >10</text>
+    
+    <!-- ANOS label under the zero -->
+    <text 
+      x="62" 
+      y="74" 
+      font-family="'Plus Jakarta Sans', 'Montserrat', sans-serif" 
+      font-weight="800" 
+      font-size="13" 
+      letter-spacing="0.5" 
+      fill="#081A36"
+    >ANOS</text>
+  </g>
+</svg>

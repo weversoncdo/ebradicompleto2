@@ -1,21 +1,55 @@
 ================================================================================
 EBRADI - ESCOLA BRASILEIRA DE DIREITO
-Código-Fonte da Página Home (HTML, CSS e JavaScript)
+Código-Fonte Completo e Recursos da Página Home (HTML, CSS, JS e React)
 ================================================================================
 
-Este pacote contém os arquivos da página Home da EBRADI com todas as melhorias:
-1. Navbar com fundo na cor #0b1b36 e logo oficial.
-2. Carrossel de Banners de Pós-Graduação em Direito.
-3. Seção dos Patronos com fotos e tipografia ampliadas para acessibilidade jurídica.
-4. Seção de Comentários / Depoimentos de Alunos com fotos e textos em itálico.
-5. Cards de Cursos no formato com foto executiva, badges ONLINE e 35% OFF, tag LAW CASE / PÓS e metadados de horas e parcelamento em cartão.
+Este pacote contém TODOS os arquivos e recursos da página Home da EBRADI,
+incluindo layout 100% responsivo, fotos de patronos em alta resolução, carrosséis,
+catálogo de cursos com 9 categorias, seção de depoimentos e suporte ao aluno.
 
-ARQUIVOS INCLUSOS:
-- ebradi-home-standalone.html : Arquivo ÚNICO pronto para duplo clique (abre direto em qualquer navegador sem servidor).
-- index.html                  : Estrutura HTML da página.
-- styles.css                  : Estilos compilados com Tailwind CSS.
-- app.js                      : Lógica e interatividade completa em JavaScript.
+--------------------------------------------------------------------------------
+COMO UTILIZAR:
+--------------------------------------------------------------------------------
 
-COMO EXECUTAR:
-Opção 1: Basta dar 2 cliques no arquivo "ebradi-home-standalone.html" para abrir no navegador!
-Opção 2: Use qualquer servidor local (como "npx serve .", Live Server do VS Code ou Python "python -m http.server 8000").
+OPÇÃO 1: EXECUÇÃO IMEDIATA (SEM INSTALAÇÃO OU SERVIDOR)
+- Dê dois cliques no arquivo:
+    ebradi-home-standalone.html
+- Ele abrirá instantaneamente em qualquer navegador (Google Chrome, Microsoft Edge,
+  Safari, Mozilla Firefox) com todos os estilos e interatividade embutidos!
+
+OPÇÃO 2: SERVIDOR WEB ESTÁTICO (HOSPEDAGEM, APACHE, NGINX, CPANEL OU LOCAL)
+- Os arquivos prontos para produção estão na raiz:
+    - index.html
+    - assets/ (contém index.css, index.js e imagens)
+    - styles.css e app.js
+    - imagens e logos (.svg, .png, .jpg)
+- Basta copiar esses arquivos para a pasta pública de qualquer servidor web
+  (ou rodar localmente com 'npx serve .' ou extensão Live Server do VS Code).
+
+OPÇÃO 3: CÓDIGO-FONTE COMPLETO REACT / VITE / TYPESCRIPT
+- A pasta 'codigo-fonte/' contém o projeto original completo:
+    - package.json
+    - vite.config.ts
+    - tsconfig.json
+    - src/ (todos os componentes React, App.tsx, catálogo de cursos, Tailwind)
+    - public/ (todos os ícones e imagens)
+- Para rodar no terminal com Node.js:
+    cd codigo-fonte
+    npm install
+    npm run dev
+  O site iniciará em modo de desenvolvimento com Hot Reload.
+
+--------------------------------------------------------------------------------
+RECURSOS INCLUÍDOS NESTE PACOTE:
+--------------------------------------------------------------------------------
+✓ Topbar com canal "Atendimento para Alunos"
+✓ Navbar na cor oficial #0b1b36 com Logo EBRADI 10 Anos
+✓ Carrossel de Banners de Pós-Graduação Jurídica
+✓ Corpo Docente e Patronos Eméritos em destaque
+✓ Seção de Depoimentos e Avaliações de Alunos
+✓ Catálogo completo com 9 categorias de cursos e filtros dinâmicos
+✓ Modal de Matrícula e Pré-Inscrição com cálculo de desconto
+✓ Painel de Acessibilidade Completo (contraste, fontes, leitor de tela)
+✓ Política de Privacidade e LGPD
+
+EBRADI - Escola Brasileira de Direito • Nota 5 no MEC

@@ -179,18 +179,18 @@ console.log("EBRADI Home Page Loaded Successfully");
                   <div className="flex items-center gap-2">
                     <FileArchive className="w-4 h-4 text-red-600" />
                     <h4 className="text-sm font-bold text-slate-900">
-                      Pacote Completo Compactado (.ZIP)
+                      Pacote Completo Compactado (.ZIP) com Todos os Recursos
                     </h4>
                   </div>
-                  <p className="text-xs text-slate-500">
-                    Contém <code className="text-slate-700 bg-slate-100 px-1 py-0.5 rounded">index.html</code>, <code className="text-slate-700 bg-slate-100 px-1 py-0.5 rounded">styles.css</code>, <code className="text-slate-700 bg-slate-100 px-1 py-0.5 rounded">app.js</code>, arquivo standalone e manual explicativo README.txt.
+                  <p className="text-xs text-slate-600">
+                    Contém todos os arquivos da página: <code className="text-slate-800 bg-slate-100 px-1 py-0.5 rounded">ebradi-home-standalone.html</code>, <code className="text-slate-800 bg-slate-100 px-1 py-0.5 rounded">index.html</code>, pasta com fotos de patronos, pasta <code className="text-slate-800 bg-slate-100 px-1 py-0.5 rounded">codigo-fonte/</code> completa (React + Vite + Tailwind) e guia <code className="text-slate-800 bg-slate-100 px-1 py-0.5 rounded">LEIA-ME.txt</code>.
                   </p>
                 </div>
 
                 <a
                   href="/download/ebradi-home-codigo.zip"
                   download="ebradi-home-codigo.zip"
-                  className="px-4 py-2.5 rounded-lg bg-[#0b1b36] hover:bg-slate-800 text-white font-bold text-xs uppercase tracking-wider text-center transition-all flex items-center justify-center gap-2 whitespace-nowrap shrink-0"
+                  className="px-4 py-2.5 rounded-lg bg-[#0b1b36] hover:bg-slate-800 text-white font-bold text-xs uppercase tracking-wider text-center transition-all flex items-center justify-center gap-2 whitespace-nowrap shrink-0 shadow-sm hover:shadow"
                 >
                   <Download className="w-4 h-4" />
                   <span>Baixar Arquivo .ZIP</span>
