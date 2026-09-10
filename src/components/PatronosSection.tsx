@@ -26,21 +26,21 @@ export const PatronosSection: React.FC<PatronosSectionProps> = ({ onOpenEnrollme
           </h2>
         </div>
 
-        {/* The 8 Patrons Grid Matching the Image Layout */}
+        {/* The 8 Patrons Grid - 2 per row on mobile, 4 on desktop */}
         <div className="relative">
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 sm:gap-6">
+          <div className="grid grid-cols-2 sm:grid-cols-2 lg:grid-cols-4 gap-2.5 sm:gap-6">
             {FACULTY.map((patron, index) => {
               const isBottomRow = index >= 4;
               return (
                 <div
                   key={patron.id}
                   onClick={() => setSelectedPatron(patron)}
-                  className={`group relative bg-gradient-to-b from-[#0e273c] via-[#091b2c] to-[#061422] rounded-2xl border border-teal-900/50 hover:border-amber-400/60 shadow-xl overflow-hidden transition-all duration-300 flex flex-col justify-between cursor-pointer transform hover:-translate-y-1 ${
+                  className={`group relative bg-gradient-to-b from-[#0e273c] via-[#091b2c] to-[#061422] rounded-xl sm:rounded-2xl border border-teal-900/50 hover:border-amber-400/60 shadow-xl overflow-hidden transition-all duration-300 flex flex-col justify-between cursor-pointer transform hover:-translate-y-1 ${
                     isBottomRow ? 'hover:z-20' : ''
                   }`}
                 >
                   {/* Patron Portrait */}
-                  <div className="h-60 sm:h-64 w-full relative overflow-hidden bg-slate-950">
+                  <div className="h-40 sm:h-64 w-full relative overflow-hidden bg-slate-950">
                     <img
                       src={patron.photo}
                       alt={patron.name}
@@ -52,28 +52,28 @@ export const PatronosSection: React.FC<PatronosSectionProps> = ({ onOpenEnrollme
                   </div>
 
                   {/* Patron Details */}
-                  <div className="p-5 pt-3 pb-6 flex flex-col items-center text-center flex-1 justify-between">
+                  <div className="p-3 sm:p-5 pt-2 sm:pt-3 pb-3 sm:pb-6 flex flex-col items-center text-center flex-1 justify-between">
                     {/* Badge PATRONO */}
-                    <div className="-mt-7 mb-3 relative z-10">
-                      <span className="bg-[#f3dfbf] text-[#1c1917] text-[10px] sm:text-[11px] font-black tracking-widest uppercase px-3.5 py-1 rounded shadow-md border border-amber-200/50 block">
+                    <div className="-mt-5 sm:-mt-7 mb-2 sm:mb-3 relative z-10">
+                      <span className="bg-[#f3dfbf] text-[#1c1917] text-[9px] sm:text-[11px] font-black tracking-widest uppercase px-2.5 py-0.5 sm:px-3.5 sm:py-1 rounded shadow-md border border-amber-200/50 block">
                         PATRONO
                       </span>
                     </div>
 
                     {/* Patron Name */}
-                    <h3 className="text-white font-extrabold text-sm sm:text-base tracking-tight uppercase leading-snug font-cinzel min-h-[2.8rem] flex items-center justify-center">
+                    <h3 className="text-white font-extrabold text-xs sm:text-base tracking-tight uppercase leading-tight font-cinzel min-h-[2.2rem] sm:min-h-[2.8rem] flex items-center justify-center">
                       {patron.name}
                     </h3>
 
                     {/* Patron Area */}
-                    <p className="text-slate-300 text-xs sm:text-sm font-normal mt-1.5 leading-relaxed min-h-[2.5rem] flex items-center justify-center">
+                    <p className="text-slate-300 text-[11px] sm:text-sm font-normal mt-1 leading-tight sm:leading-relaxed min-h-[2.2rem] sm:min-h-[2.5rem] flex items-center justify-center line-clamp-2">
                       {patron.area}
                     </p>
 
                     {/* Hover Hint */}
-                    <span className="mt-3 text-[11px] text-amber-400/80 font-semibold opacity-0 group-hover:opacity-100 transition-opacity flex items-center gap-1">
-                      <span>Ver biografia & obras</span>
-                      <ArrowRight className="w-3 h-3" />
+                    <span className="mt-2 text-[10px] sm:text-[11px] text-amber-400/80 font-semibold opacity-0 group-hover:opacity-100 transition-opacity flex items-center gap-1">
+                      <span>Ver biografia</span>
+                      <ArrowRight className="w-2.5 h-2.5 sm:w-3 sm:h-3" />
                     </span>
                   </div>
                 </div>

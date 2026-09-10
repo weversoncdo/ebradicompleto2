@@ -1,4 +1,4 @@
-import React, { useState, useMemo } from 'react';
+import React, { useState, useMemo, useRef, useEffect } from 'react';
 import { Course, CourseCategory } from '../types';
 import { COURSES } from '../data/courses';
 import { 
@@ -13,7 +13,9 @@ import {
   Filter,
   ShieldCheck,
   Zap,
-  CreditCard
+  CreditCard,
+  ChevronLeft,
+  ChevronRight
 } from 'lucide-react';
 
 interface CourseCatalogProps {
@@ -34,6 +36,9 @@ export const CourseCatalog: React.FC<CourseCatalogProps> = ({
   onEnrollCourse,
 }) => {
   const [selectedAreaFilter, setSelectedAreaFilter] = useState<string>('all');
+  const carouselRef = useRef<HTMLDivElement>(null);
+  const [canScrollLeft, setCanScrollLeft] = useState(false);
+  const [canScrollRight, setCanScrollRight] = useState(true);
 
   const categories: { id: string; label: string; count: number }[] = [
     { id: 'pos', label: 'PÓS-GRADUAÇÃO', count: COURSES.filter(c => c.category === 'pos').length },
@@ -88,6 +93,35 @@ export const CourseCatalog: React.FC<CourseCatalogProps> = ({
       return matchesCategory && matchesArea && matchesQuery;
     });
   }, [activeCategoryId, selectedAreaFilter, searchQuery]);
+
+  // Check scroll boundary state on mobile carousel
+  const handleScroll = () => {
+    if (carouselRef.current) {
+      const { scrollLeft, scrollWidth, clientWidth } = carouselRef.current;
+      setCanScrollLeft(scrollLeft > 10);
+      setCanScrollRight(scrollLeft < scrollWidth - clientWidth - 10);
+    }
+  };
+
+  // Reset scroll when category or filter changes
+  useEffect(() => {
+    if (carouselRef.current) {
+      carouselRef.current.scrollTo({ left: 0, behavior: 'smooth' });
+      setCanScrollLeft(false);
+      setCanScrollRight(filteredCourses.length > 1);
+    }
+  }, [activeCategoryId, selectedAreaFilter, searchQuery, filteredCourses.length]);
+
+  // Manual slide control for mobile slider
+  const handleScrollStep = (direction: 'left' | 'right') => {
+    if (carouselRef.current) {
+      const step = carouselRef.current.clientWidth;
+      carouselRef.current.scrollBy({
+        left: direction === 'left' ? -step : step,
+        behavior: 'smooth',
+      });
+    }
+  };
 
   return (
     <section id="cursos-section" className="py-16 lg:py-24 bg-slate-50 border-b border-slate-200">
@@ -182,7 +216,7 @@ export const CourseCatalog: React.FC<CourseCatalogProps> = ({
           </div>
         </div>
 
-        {/* Course Cards Grid */}
+        {/* Course Cards Carousel on Mobile, Responsive Grid on Desktop */}
         {filteredCourses.length === 0 ? (
           <div className="bg-white rounded-2xl border border-slate-200 p-12 text-center max-w-lg mx-auto space-y-4 shadow-sm">
             <div className="w-12 h-12 rounded-full bg-red-100 text-red-600 flex items-center justify-center mx-auto">
@@ -206,125 +240,161 @@ export const CourseCatalog: React.FC<CourseCatalogProps> = ({
             </button>
           </div>
         ) : (
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-            {filteredCourses.map((course) => (
-              <div
-                key={course.id}
-                className="bg-[#0b1a28] rounded-2xl border border-slate-800 shadow-xl hover:shadow-2xl hover:border-slate-700 transition-all duration-300 flex flex-col justify-between overflow-hidden group"
-              >
-                <div>
-                  {/* Card Image Area with Overlaid Badges and Smooth Fade */}
-                  <div className="relative w-full h-56 sm:h-60 overflow-hidden bg-slate-900">
-                    <img
-                      src={course.cardImage || course.coordinatorPhoto}
-                      alt={course.title}
-                      className="w-full h-full object-cover object-top group-hover:scale-105 transition-transform duration-500"
-                    />
-                    {/* Deep gradient fade at the bottom into the card */}
-                    <div className="absolute inset-0 bg-gradient-to-t from-[#0b1a28] via-[#0b1a28]/40 to-transparent" />
+          <div>
+            <div 
+              ref={carouselRef}
+              onScroll={handleScroll}
+              className="flex md:grid md:grid-cols-2 lg:grid-cols-3 gap-0 md:gap-8 overflow-x-auto md:overflow-visible snap-x snap-mandatory scroll-smooth no-scrollbar w-full py-2"
+            >
+              {filteredCourses.map((course) => (
+                <div
+                  key={course.id}
+                  data-course-card
+                  className="w-full shrink-0 md:shrink md:w-auto snap-center bg-[#0b1a28] rounded-2xl border border-slate-800 shadow-xl hover:shadow-2xl hover:border-slate-700 transition-all duration-300 flex flex-col justify-between overflow-hidden group"
+                >
+                  <div>
+                    {/* Card Image Area with Overlaid Badges - Slightly increased vertical height for balanced mobile view */}
+                    <div className="relative w-full h-44 sm:h-52 md:h-60 overflow-hidden bg-slate-900">
+                      <img
+                        src={course.cardImage || course.coordinatorPhoto}
+                        alt={course.title}
+                        className="w-full h-full object-cover object-top group-hover:scale-105 transition-transform duration-500"
+                      />
+                      {/* Deep gradient fade at the bottom into the card */}
+                      <div className="absolute inset-0 bg-gradient-to-t from-[#0b1a28] via-[#0b1a28]/40 to-transparent" />
 
-                    {/* Top Left Badge: ONLINE */}
-                    <div className="absolute top-3.5 left-3.5 z-10">
-                      <span className="px-3 py-1 bg-[#1d61c6] text-white text-[11px] font-black uppercase tracking-wider rounded shadow-md">
-                        ONLINE
-                      </span>
-                    </div>
-
-                    {/* Top Right Badge: Discount */}
-                    <div className="absolute top-3.5 right-3.5 z-10">
-                      <span className="px-3 py-1 bg-[#d92525] text-white text-[11px] font-black uppercase tracking-wider rounded shadow-md">
-                        {course.discountBadge || '35% OFF'}
-                      </span>
-                    </div>
-                  </div>
-
-                  {/* Card Body */}
-                  <div className="p-6 pt-3 space-y-3.5">
-                    {/* Category Pill Tag */}
-                    <div className="flex items-center gap-2">
-                      <span className="inline-block px-3 py-1 rounded bg-[#7e22ce] text-white text-[11px] font-extrabold uppercase tracking-wider shadow-sm">
-                        {course.categoryTag || (course.category === 'pos' ? 'PÓS-GRADUAÇÃO' : course.category === 'oab' ? 'PREPARATÓRIO OAB' : 'LAW CASE')}
-                      </span>
-
-                      {course.mecGrade && (
-                        <span className="inline-flex items-center gap-1 px-2 py-0.5 rounded bg-emerald-950/80 border border-emerald-500/40 text-emerald-300 text-[10px] font-bold">
-                          <Award className="w-3 h-3 text-emerald-400" />
-                          MEC 5
+                      {/* Top Left Badge: ONLINE */}
+                      <div className="absolute top-2.5 left-2.5 sm:top-3.5 sm:left-3.5 z-10">
+                        <span className="px-2.5 py-0.5 sm:px-3 sm:py-1 bg-[#1d61c6] text-white text-[10px] sm:text-[11px] font-black uppercase tracking-wider rounded shadow-md">
+                          ONLINE
                         </span>
-                      )}
+                      </div>
 
-                      {course.badge && !course.mecGrade && (
-                        <span className="px-2 py-0.5 rounded bg-slate-800 text-amber-300 border border-amber-500/30 text-[10px] font-bold">
-                          {course.badge}
-                        </span>
-                      )}
-                    </div>
-
-                    {/* Course Title in Bold Uppercase White */}
-                    <h3 
-                      onClick={() => onSelectCourse(course)}
-                      className="text-lg sm:text-xl font-black text-white group-hover:text-red-400 transition-colors cursor-pointer leading-snug uppercase tracking-tight line-clamp-2"
-                    >
-                      {course.title}
-                    </h3>
-                  </div>
-                </div>
-
-                {/* Card Footer: Pricing, Clock & Card Metadata, and Action Buttons */}
-                <div className="p-6 pt-3 space-y-4">
-                  {/* Pricing Row */}
-                  <div className="pt-3 border-t border-slate-800 flex items-baseline justify-between">
-                    <div>
-                      <span className="text-[11px] text-slate-400 block line-through">
-                        De R$ {course.originalPrice.toFixed(2).replace('.', ',')}
-                      </span>
-                      <div className="flex items-baseline gap-1">
-                        <span className="text-xs text-slate-400 font-semibold">
-                          {course.installments}x de
-                        </span>
-                        <span className="text-2xl font-black text-white">
-                          R$ {course.promotionalPrice.toFixed(2).replace('.', ',')}
+                      {/* Top Right Badge: Discount */}
+                      <div className="absolute top-2.5 right-2.5 sm:top-3.5 sm:right-3.5 z-10">
+                        <span className="px-2.5 py-0.5 sm:px-3 sm:py-1 bg-[#d92525] text-white text-[10px] sm:text-[11px] font-black uppercase tracking-wider rounded shadow-md">
+                          {course.discountBadge || '35% OFF'}
                         </span>
                       </div>
                     </div>
 
-                    <span className="text-[10px] font-bold text-emerald-300 bg-emerald-950/60 border border-emerald-500/30 px-2.5 py-1 rounded">
-                      Início Imediato
-                    </span>
+                    {/* Card Body - Balanced vertical spacing */}
+                    <div className="p-4 sm:p-6 pt-3 sm:pt-3 space-y-2.5 sm:space-y-3.5">
+                      {/* Category Pill Tag */}
+                      <div className="flex items-center gap-1.5 sm:gap-2">
+                        <span className="inline-block px-2.5 py-0.5 sm:px-3 sm:py-1 rounded bg-[#7e22ce] text-white text-[10px] sm:text-[11px] font-extrabold uppercase tracking-wider shadow-sm">
+                          {course.categoryTag || (course.category === 'pos' ? 'PÓS-GRADUAÇÃO' : course.category === 'oab' ? 'PREPARATÓRIO OAB' : 'LAW CASE')}
+                        </span>
+
+                        {course.mecGrade && (
+                          <span className="inline-flex items-center gap-1 px-2 py-0.5 rounded bg-emerald-950/80 border border-emerald-500/40 text-emerald-300 text-[9px] sm:text-[10px] font-bold">
+                            <Award className="w-3 h-3 text-emerald-400" />
+                            MEC 5
+                          </span>
+                        )}
+
+                        {course.badge && !course.mecGrade && (
+                          <span className="px-2 py-0.5 rounded bg-slate-800 text-amber-300 border border-amber-500/30 text-[9px] sm:text-[10px] font-bold">
+                            {course.badge}
+                          </span>
+                        )}
+                      </div>
+
+                      {/* Course Title */}
+                      <h3 
+                        onClick={() => onSelectCourse(course)}
+                        className="text-base sm:text-lg md:text-xl font-black text-white group-hover:text-red-400 transition-colors cursor-pointer leading-snug uppercase tracking-tight line-clamp-2"
+                      >
+                        {course.title}
+                      </h3>
+                    </div>
                   </div>
 
-                  {/* Metadata Row matching the attached image: Clock + Credit Card */}
-                  <div className="flex items-center justify-between text-xs text-slate-400 pt-2 border-t border-slate-800/80">
-                    <div className="flex items-center gap-1.5">
-                      <Clock className="w-4 h-4 text-slate-400" />
-                      <span>{course.hours}</span>
-                    </div>
-                    <div className="flex items-center gap-1.5">
-                      <CreditCard className="w-4 h-4 text-slate-400" />
-                      <span>Até {course.installments}x no Cartão</span>
-                    </div>
-                  </div>
+                  {/* Card Footer: Pricing, Metadata, and Action Buttons */}
+                  <div className="p-4 sm:p-6 pt-2.5 sm:pt-3 space-y-3 sm:space-y-4">
+                    {/* Pricing Row */}
+                    <div className="pt-2 sm:pt-3 border-t border-slate-800 flex items-baseline justify-between">
+                      <div>
+                        <span className="text-[10px] sm:text-[11px] text-slate-400 block line-through">
+                          De R$ {course.originalPrice.toFixed(2).replace('.', ',')}
+                        </span>
+                        <div className="flex items-baseline gap-1">
+                          <span className="text-[11px] sm:text-xs text-slate-400 font-semibold">
+                            {course.installments}x de
+                          </span>
+                          <span className="text-xl sm:text-2xl font-black text-white">
+                            R$ {course.promotionalPrice.toFixed(2).replace('.', ',')}
+                          </span>
+                        </div>
+                      </div>
 
-                  {/* Action Buttons */}
-                  <div className="grid grid-cols-2 gap-2.5 pt-1">
-                    <button
-                      onClick={() => onSelectCourse(course)}
-                      className="py-2.5 px-3 rounded-lg border border-slate-700 hover:border-slate-500 text-slate-200 font-bold text-xs text-center transition-colors hover:bg-slate-800/80 flex items-center justify-center gap-1 cursor-pointer"
-                    >
-                      <span>SAIBA MAIS</span>
-                      <ArrowUpRight className="w-3.5 h-3.5" />
-                    </button>
+                      <span className="text-[9px] sm:text-[10px] font-bold text-emerald-300 bg-emerald-950/60 border border-emerald-500/30 px-2 py-0.5 sm:px-2.5 sm:py-1 rounded">
+                        Início Imediato
+                      </span>
+                    </div>
 
-                    <button
-                      onClick={() => onEnrollCourse(course)}
-                      className="py-2.5 px-3 rounded-lg bg-red-600 hover:bg-red-700 text-white font-extrabold text-xs uppercase tracking-wider text-center shadow-md hover:shadow-lg transition-all flex items-center justify-center gap-1 cursor-pointer"
-                    >
-                      <span>Garantir Vaga</span>
-                    </button>
+                    {/* Metadata Row: Clock + Credit Card */}
+                    <div className="flex items-center justify-between text-[11px] sm:text-xs text-slate-400 pt-1.5 sm:pt-2 border-t border-slate-800/80">
+                      <div className="flex items-center gap-1 sm:gap-1.5">
+                        <Clock className="w-3.5 h-3.5 sm:w-4 sm:h-4 text-slate-400" />
+                        <span>{course.hours}</span>
+                      </div>
+                      <div className="flex items-center gap-1 sm:gap-1.5">
+                        <CreditCard className="w-3.5 h-3.5 sm:w-4 sm:h-4 text-slate-400" />
+                        <span>Até {course.installments}x</span>
+                      </div>
+                    </div>
+
+                    {/* Action Buttons */}
+                    <div className="grid grid-cols-2 gap-2 sm:gap-2.5 pt-0.5 sm:pt-1">
+                      <button
+                        onClick={() => onSelectCourse(course)}
+                        className="py-2.5 sm:py-2.5 px-2 sm:px-3 rounded-lg border border-slate-700 hover:border-slate-500 text-slate-200 font-bold text-xs text-center transition-colors hover:bg-slate-800/80 flex items-center justify-center gap-1 cursor-pointer"
+                      >
+                        <span>SAIBA MAIS</span>
+                        <ArrowUpRight className="w-3.5 h-3.5" />
+                      </button>
+
+                      <button
+                        onClick={() => onEnrollCourse(course)}
+                        className="py-2.5 sm:py-2.5 px-2 sm:px-3 rounded-lg bg-red-600 hover:bg-red-700 text-white font-extrabold text-xs uppercase tracking-wider text-center shadow-md hover:shadow-lg transition-all flex items-center justify-center gap-1 cursor-pointer"
+                      >
+                        <span>Garantir Vaga</span>
+                      </button>
+                    </div>
                   </div>
                 </div>
+              ))}
+            </div>
+
+            {/* Mobile Manual Slider Carousel Controls (matching attached reference image) */}
+            {filteredCourses.length > 1 && (
+              <div className="flex md:hidden items-center justify-center gap-3.5 mt-5">
+                <button
+                  type="button"
+                  onClick={() => handleScrollStep('left')}
+                  disabled={!canScrollLeft}
+                  aria-label="Voltar para curso anterior"
+                  className={`w-11 h-11 rounded-full bg-white text-[#0b1b36] shadow-md border border-slate-200/90 flex items-center justify-center transition-all cursor-pointer ${
+                    !canScrollLeft ? 'opacity-40 cursor-not-allowed' : 'hover:bg-slate-100 active:scale-95'
+                  }`}
+                >
+                  <ChevronLeft className="w-6 h-6 text-[#0b1b36] stroke-[2.5]" />
+                </button>
+
+                <button
+                  type="button"
+                  onClick={() => handleScrollStep('right')}
+                  disabled={!canScrollRight}
+                  aria-label="Avançar para próximo curso"
+                  className={`w-11 h-11 rounded-full bg-white text-[#0b1b36] shadow-md border border-slate-200/90 flex items-center justify-center transition-all cursor-pointer ${
+                    !canScrollRight ? 'opacity-40 cursor-not-allowed' : 'hover:bg-slate-100 active:scale-95'
+                  }`}
+                >
+                  <ChevronRight className="w-6 h-6 text-[#0b1b36] stroke-[2.5]" />
+                </button>
               </div>
-            ))}
+            )}
           </div>
         )}
 

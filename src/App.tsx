@@ -73,10 +73,20 @@ export default function App() {
         setSearchQuery={setSearchQuery}
       />
 
-      {/* Carrossel de Banner sobre Pós-Graduação em Direito (Abaixo da Logo) */}
+      {/* Banner Estático Principal de Vendas - Pós-Graduação em Direito */}
       <PosGraduacaoBannerCarousel
-        onOpenEnrollment={handleOpenEnrollmentGeneral}
+        onOpenEnrollment={(courseId?: string) => {
+          if (courseId) {
+            const course = COURSES.find(c => c.id === courseId);
+            if (course) {
+              handleOpenEnrollmentForCourse(course);
+              return;
+            }
+          }
+          handleOpenEnrollmentGeneral();
+        }}
         onSelectCategory={handleFilterCourses}
+        selectedCategory={selectedCategory}
       />
 
       {/* Main Content Areas */}

@@ -3,7 +3,7 @@ import { FAQS } from '../data/testimonials';
 import { HelpCircle, ChevronDown, ChevronUp } from 'lucide-react';
 
 export const FaqSection: React.FC = () => {
-  const [openIndex, setOpenIndex] = useState<number | null>(0);
+  const [openIndex, setOpenIndex] = useState<number | null>(null);
 
   const toggleFaq = (index: number) => {
     setOpenIndex(openIndex === index ? null : index);
@@ -64,30 +64,6 @@ export const FaqSection: React.FC = () => {
               </div>
             );
           })}
-        </div>
-
-        {/* Contact Assistance */}
-        <div className="mt-12 text-center p-6 rounded-2xl bg-slate-50 border border-slate-200">
-          <p className="text-xs sm:text-sm text-slate-700">
-            Ainda ficou com alguma dúvida sobre seu curso ou matrícula?
-          </p>
-          <div className="mt-3 flex items-center justify-center gap-4 flex-wrap">
-            <a
-              href="tel:08000069000"
-              className="text-xs font-bold text-[#0b1b36] hover:text-red-600 transition-colors"
-            >
-              Ligue grátis: 0800 006 9000
-            </a>
-            <span className="text-slate-300">•</span>
-            <a
-              href="https://api.whatsapp.com/send?phone=5511999999999&text=Ol%C3%A1!%20Tenho%20uma%20d%C3%BAvida%20sobre%20a%20EBRADI."
-              target="_blank"
-              rel="noopener noreferrer"
-              className="text-xs font-bold text-emerald-700 hover:text-emerald-800 transition-colors"
-            >
-              Falar no WhatsApp com Consultor
-            </a>
-          </div>
         </div>
 
       </div>

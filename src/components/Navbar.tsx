@@ -46,19 +46,19 @@ export const Navbar: React.FC<NavbarProps> = ({
   return (
     <header className="sticky top-0 z-40 w-full bg-[#0b1b36] shadow-md transition-all">
       {/* Top Notification & Utility Bar */}
-      <div className="bg-[#071326] text-slate-200 text-xs py-2 px-4 border-b border-slate-800/80">
-        <div className="max-w-7xl mx-auto flex flex-col md:flex-row items-center justify-between gap-2">
-          <div className="flex items-center gap-3 text-center md:text-left flex-wrap justify-center">
-            <span className="inline-flex items-center gap-1.5 px-2 py-0.5 rounded bg-red-600 text-white font-semibold uppercase tracking-wider text-[10px]">
+      <div className="bg-[#071326] text-slate-200 py-3.5 sm:py-3 px-4 border-b border-slate-800/80 min-h-[48px] flex items-center">
+        <div className="max-w-7xl mx-auto w-full flex items-center justify-center md:justify-between gap-2 sm:gap-3">
+          <div className="flex items-center gap-2.5 text-center md:text-left justify-center leading-normal whitespace-nowrap">
+            <span className="inline-flex items-center justify-center shrink-0 px-3 py-1 rounded bg-red-600 text-white font-bold uppercase tracking-wider text-[10px] sm:text-[11px] leading-tight shadow-sm">
               Nota 5 no MEC
             </span>
-            <span className="hidden sm:inline text-slate-400">|</span>
-            <span className="text-slate-200 font-medium">
-              Matrículas Abertas com Bolsas de até 50% + Módulo de Inteligência Artificial Jurídica
+            <span className="text-slate-500 font-normal text-xs">|</span>
+            <span className="text-slate-200 font-semibold text-xs sm:text-xs leading-tight">
+              Matrículas Abertas
             </span>
           </div>
 
-          <div className="flex items-center gap-4 text-slate-300">
+          <div className="hidden md:flex items-center gap-4 text-slate-300 shrink-0">
             <a 
               href="https://api.whatsapp.com/send?phone=551140071192&text=Ol%C3%A1!%20Sou%20aluno%20da%20EBRADI%20e%20gostaria%20de%20atendimento." 
               target="_blank" 
@@ -76,7 +76,7 @@ export const Navbar: React.FC<NavbarProps> = ({
       {/* Main Navbar (Background #0b1b36 com a Logo EBRADI 10 Anos) */}
       <div className="w-full bg-[#0b1b36] border-b border-slate-800">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="flex items-center justify-between h-20">
+          <div className="flex items-center justify-between h-20 sm:h-22">
             {/* Logo EBRADI 10 ANOS */}
             <a 
               href="#" 

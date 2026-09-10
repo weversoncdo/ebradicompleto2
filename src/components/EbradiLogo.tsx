@@ -22,10 +22,10 @@ export const EbradiLogo: React.FC<EbradiLogoProps> = ({
   return (
     <div className={`inline-flex items-center select-none ${heightClass} ${className}`}>
       <svg 
-        viewBox="0 0 375 90" 
+        viewBox="0 -14 375 116" 
         fill="none" 
         xmlns="http://www.w3.org/2000/svg" 
-        className="h-full w-auto max-w-full drop-shadow-xs"
+        className="h-full w-auto max-w-full drop-shadow-xs overflow-visible" 
         aria-label="EBRADI 10 Anos - Escola Brasileira de Direito"
       >
         <defs>
@@ -53,15 +53,15 @@ export const EbradiLogo: React.FC<EbradiLogoProps> = ({
         </text>
 
         {/* 10 ANOS Emblem */}
-        <g transform="translate(242, 0)">
+        <g transform="translate(242, 4)">
           {/* Serif italic Roman numeral 10 */}
           <text
             x="0"
-            y="66"
+            y="62"
             fontFamily="'Playfair Display', 'Cinzel', 'Didot', 'Bodoni MT', Georgia, serif"
             fontStyle="italic"
             fontWeight="700"
-            fontSize="82"
+            fontSize="76"
             fill={`url(#goldGrad-${variant})`}
           >
             10
@@ -69,8 +69,8 @@ export const EbradiLogo: React.FC<EbradiLogoProps> = ({
 
           {/* ANOS label positioned at the bottom right */}
           <text
-            x="64"
-            y="74"
+            x="60"
+            y="70"
             fontFamily="'Plus Jakarta Sans', 'Montserrat', sans-serif"
             fontWeight="800"
             fontSize="13"

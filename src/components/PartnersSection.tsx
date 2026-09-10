@@ -52,8 +52,8 @@ const PartnerLogo: React.FC<{ type: Partner['logoType'] }> = ({ type }) => {
   switch (type) {
     case 'oab':
       return (
-        <div className="flex items-center justify-center h-16 w-36 sm:w-44 select-none">
-          <svg viewBox="0 0 160 70" className="w-full h-full max-h-16" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <div className="flex items-center justify-center h-10 sm:h-16 w-full max-w-[120px] sm:max-w-44 select-none">
+          <svg viewBox="0 0 160 70" className="w-full h-full max-h-10 sm:max-h-16" fill="none" xmlns="http://www.w3.org/2000/svg">
             <defs>
               <radialGradient id="oabGlobeGrad" cx="35%" cy="35%" r="65%">
                 <stop offset="0%" stopColor="#2c72b8" />
@@ -111,9 +111,9 @@ const PartnerLogo: React.FC<{ type: Partner['logoType'] }> = ({ type }) => {
 
     case 'iasp':
       return (
-        <div className="flex items-center justify-center gap-2.5 h-16 w-44 sm:w-52 select-none">
+        <div className="flex items-center justify-center gap-1.5 sm:gap-2.5 h-10 sm:h-16 w-full max-w-[130px] sm:max-w-52 select-none">
           {/* Classical IASP Seal */}
-          <svg viewBox="0 0 60 60" className="w-12 h-12 shrink-0" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <svg viewBox="0 0 60 60" className="w-8 h-8 sm:w-12 sm:h-12 shrink-0" fill="none" xmlns="http://www.w3.org/2000/svg">
             <circle cx="30" cy="30" r="28" stroke="#8b2323" strokeWidth="2.5" fill="#ffffff" />
             <circle cx="30" cy="30" r="24" stroke="#8b2323" strokeWidth="1" strokeDasharray="2 1.5" />
             {/* Classical Pillar / Column */}
@@ -126,16 +126,16 @@ const PartnerLogo: React.FC<{ type: Partner['logoType'] }> = ({ type }) => {
           </svg>
           {/* IASP Typography */}
           <div className="flex flex-col text-left leading-none">
-            <span className="font-serif font-bold text-[#8b2323] text-xl tracking-tight leading-none mb-1">
+            <span className="font-serif font-bold text-[#8b2323] text-sm sm:text-xl tracking-tight leading-none mb-0.5 sm:mb-1">
               IASP
             </span>
-            <span className="text-[#8b2323] text-[8.5px] uppercase tracking-wider font-semibold leading-tight">
+            <span className="text-[#8b2323] text-[6px] sm:text-[8.5px] uppercase tracking-wider font-semibold leading-tight">
               INSTITUTO
             </span>
-            <span className="text-[#8b2323] text-[8.5px] uppercase tracking-wider font-semibold leading-tight">
+            <span className="text-[#8b2323] text-[6px] sm:text-[8.5px] uppercase tracking-wider font-semibold leading-tight">
               DOS ADVOGADOS
             </span>
-            <span className="text-[#8b2323] text-[8.5px] uppercase tracking-wider font-semibold leading-tight">
+            <span className="text-[#8b2323] text-[6px] sm:text-[8.5px] uppercase tracking-wider font-semibold leading-tight">
               DE SÃO PAULO
             </span>
           </div>
@@ -144,46 +144,46 @@ const PartnerLogo: React.FC<{ type: Partner['logoType'] }> = ({ type }) => {
 
     case 'caamt':
       return (
-        <div className="flex flex-col items-center justify-center text-center h-16 w-44 sm:w-52 select-none">
+        <div className="flex flex-col items-center justify-center text-center h-10 sm:h-16 w-full max-w-[130px] sm:max-w-52 select-none">
           {/* Stylized Wing Swooshes */}
-          <svg viewBox="0 0 100 35" className="w-24 h-8" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <svg viewBox="0 0 100 35" className="w-16 h-5 sm:w-24 sm:h-8" fill="none" xmlns="http://www.w3.org/2000/svg">
             <path d="M 15 32 Q 55 18 85 4 Q 60 14 30 26 Z" fill="#291e47" />
             <path d="M 22 33 Q 65 24 95 10 Q 70 20 38 29 Z" fill="#d92b34" />
             <path d="M 32 34 Q 72 29 98 18 Q 78 26 48 32 Z" fill="#1c4482" />
           </svg>
           {/* Subtitle Script */}
-          <span className="text-[7.5px] text-slate-500 italic -mt-1 block">Cuidando do Advogado</span>
+          <span className="text-[6px] sm:text-[7.5px] text-slate-500 italic -mt-0.5 sm:-mt-1 block">Cuidando do Advogado</span>
           {/* CAAMT Name */}
-          <div className="flex items-center justify-center text-sm font-black tracking-tight leading-none">
+          <div className="flex items-center justify-center text-xs sm:text-sm font-black tracking-tight leading-none">
             <span className="text-[#13233f]">CAA</span>
             <span className="text-[#d92b34]">MT</span>
           </div>
-          <span className="text-[7px] text-slate-600 font-medium tracking-tight">Caixa de Assistência dos Advogados</span>
+          <span className="text-[5.5px] sm:text-[7px] text-slate-600 font-medium tracking-tight">Caixa de Assistência dos Advogados</span>
         </div>
       );
 
     case 'caaam':
       return (
-        <div className="flex items-center justify-center gap-2 h-16 w-44 sm:w-52 select-none">
+        <div className="flex items-center justify-center gap-1 sm:gap-2 h-10 sm:h-16 w-full max-w-[130px] sm:max-w-52 select-none">
           {/* OAB Amazonas Lockup */}
           <div className="flex flex-col items-center">
-            <div className="flex items-center gap-1">
-              <svg viewBox="0 0 45 45" className="w-6 h-6 shrink-0" fill="none">
+            <div className="flex items-center gap-0.5 sm:gap-1">
+              <svg viewBox="0 0 45 45" className="w-4 h-4 sm:w-6 sm:h-6 shrink-0" fill="none">
                 <circle cx="22.5" cy="22.5" r="20" fill="#15427d" />
                 <path d="M 4 23 C 12 15 33 15 41 23 C 33 17 12 17 4 23 Z" fill="#ffffff" opacity="0.85" />
               </svg>
-              <div className="text-red-600 font-black text-xs leading-none">AB</div>
+              <div className="text-red-600 font-black text-[10px] sm:text-xs leading-none">AB</div>
             </div>
-            <span className="text-[6.5px] font-bold text-[#15427d] tracking-widest uppercase mt-0.5">
+            <span className="text-[5px] sm:text-[6.5px] font-bold text-[#15427d] tracking-widest uppercase mt-0.5">
               AMAZONAS
             </span>
           </div>
 
           {/* Divider */}
-          <div className="w-[1.5px] h-9 bg-slate-400/80" />
+          <div className="w-[1px] sm:w-[1.5px] h-6 sm:h-9 bg-slate-400/80" />
 
           {/* CAAAM Name */}
-          <span className="text-[#0d6b85] font-black text-sm sm:text-base tracking-wider">
+          <span className="text-[#0d6b85] font-black text-xs sm:text-base tracking-wider">
             CAAAM
           </span>
         </div>
@@ -191,26 +191,26 @@ const PartnerLogo: React.FC<{ type: Partner['logoType'] }> = ({ type }) => {
 
     case 'caasc':
       return (
-        <div className="flex items-center justify-center gap-2 h-16 w-44 sm:w-52 select-none">
+        <div className="flex items-center justify-center gap-1 sm:gap-2 h-10 sm:h-16 w-full max-w-[130px] sm:max-w-52 select-none">
           {/* OAB Santa Catarina Lockup */}
           <div className="flex flex-col items-center">
-            <div className="flex items-center gap-1">
-              <svg viewBox="0 0 45 45" className="w-6 h-6 shrink-0" fill="none">
+            <div className="flex items-center gap-0.5 sm:gap-1">
+              <svg viewBox="0 0 45 45" className="w-4 h-4 sm:w-6 sm:h-6 shrink-0" fill="none">
                 <circle cx="22.5" cy="22.5" r="20" fill="#15427d" />
                 <path d="M 4 23 C 12 15 33 15 41 23 C 33 17 12 17 4 23 Z" fill="#ffffff" opacity="0.85" />
               </svg>
-              <div className="text-red-600 font-black text-xs leading-none">AB</div>
+              <div className="text-red-600 font-black text-[10px] sm:text-xs leading-none">AB</div>
             </div>
-            <span className="text-[6px] font-bold text-[#15427d] tracking-wider uppercase mt-0.5 whitespace-nowrap">
+            <span className="text-[5px] sm:text-[6px] font-bold text-[#15427d] tracking-wider uppercase mt-0.5 whitespace-nowrap">
               SANTA CATARINA
             </span>
           </div>
 
           {/* Divider */}
-          <div className="w-[1.5px] h-9 bg-slate-400/80" />
+          <div className="w-[1px] sm:w-[1.5px] h-6 sm:h-9 bg-slate-400/80" />
 
           {/* CAASC Name */}
-          <span className="text-[#0e3b68] font-black text-sm sm:text-base tracking-wider">
+          <span className="text-[#0e3b68] font-black text-xs sm:text-base tracking-wider">
             CAASC
           </span>
         </div>
@@ -251,34 +251,34 @@ export const PartnersSection: React.FC<PartnersSectionProps> = ({ onOpenEnrollme
           </p>
         </div>
 
-        {/* Partners Cards Grid */}
-        <div className="grid grid-cols-1 lg:grid-cols-2 gap-6 max-w-6xl mx-auto">
+        {/* Partners Cards Grid - 2 per row on mobile, 2 per row on desktop */}
+        <div className="grid grid-cols-2 lg:grid-cols-2 gap-2.5 sm:gap-6 max-w-6xl mx-auto">
           {PARTNERS.map((partner, index) => {
             const isLastSingle = index === PARTNERS.length - 1 && PARTNERS.length % 2 !== 0;
             return (
               <div
                 key={partner.id}
-                className={`bg-white rounded-2xl p-6 sm:p-7 shadow-xl border border-slate-100 hover:shadow-2xl hover:border-slate-200 transition-all duration-300 transform hover:-translate-y-1 flex flex-col justify-between ${
-                  isLastSingle ? 'lg:col-span-2 lg:max-w-xl lg:mx-auto w-full' : ''
+                className={`bg-white rounded-xl sm:rounded-2xl p-3 sm:p-7 shadow-xl border border-slate-100 hover:shadow-2xl hover:border-slate-200 transition-all duration-300 transform hover:-translate-y-1 flex flex-col justify-between ${
+                  isLastSingle ? 'col-span-2 sm:col-span-1 lg:col-span-2 lg:max-w-xl lg:mx-auto w-full' : ''
                 }`}
               >
-                <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-5 h-full">
-                  {/* Left Column: Tag, Title and Description */}
-                  <div className="flex-1 space-y-2.5">
+                <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-2.5 sm:gap-5 h-full">
+                  {/* Left Column / Main Info: Tag, Title and Description */}
+                  <div className="flex-1 space-y-1.5 sm:space-y-2.5">
                     {/* Top Tag Badge */}
                     <div className="inline-block">
-                      <span className="bg-[#1ea88e] text-white text-[11px] font-bold px-3 py-1 rounded uppercase tracking-wider shadow-xs">
+                      <span className="bg-[#1ea88e] text-white text-[9px] sm:text-[11px] font-bold px-2 py-0.5 sm:px-3 sm:py-1 rounded uppercase tracking-wider shadow-xs">
                         {partner.tag}
                       </span>
                     </div>
 
                     {/* Title */}
-                    <h3 className="text-slate-900 font-extrabold text-base sm:text-lg tracking-tight leading-snug uppercase pt-1">
+                    <h3 className="text-slate-900 font-extrabold text-[11px] sm:text-base lg:text-lg tracking-tight leading-snug uppercase pt-0.5">
                       {partner.title}
                     </h3>
 
                     {/* Description */}
-                    <p className="text-slate-700 text-xs sm:text-sm leading-relaxed font-normal">
+                    <p className="text-slate-700 text-[10px] sm:text-xs lg:text-sm leading-normal sm:leading-relaxed font-normal">
                       {partner.description}
                     </p>
                   </div>
@@ -286,8 +286,8 @@ export const PartnersSection: React.FC<PartnersSectionProps> = ({ onOpenEnrollme
                   {/* Vertical Divider */}
                   <div className="hidden sm:block w-px h-24 bg-slate-200 shrink-0 mx-2" />
 
-                  {/* Right Column: Official Logo */}
-                  <div className="shrink-0 flex items-center justify-center p-2 rounded-lg bg-slate-50/50 sm:bg-transparent">
+                  {/* Right Column / Bottom on mobile: Official Logo */}
+                  <div className="shrink-0 flex items-center justify-center p-1 sm:p-2 rounded-lg bg-slate-50/70 sm:bg-transparent mt-1 sm:mt-0">
                     <PartnerLogo type={partner.logoType} />
                   </div>
                 </div>

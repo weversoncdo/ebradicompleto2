@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React from 'react';
 import { TESTIMONIALS } from '../data/testimonials';
 import { Star, Award, CheckCircle2, MessageSquareQuote, ThumbsUp, Sparkles, UserCheck } from 'lucide-react';
 import { NewsletterSection } from './NewsletterSection';
@@ -8,19 +8,6 @@ interface TestimonialsSectionProps {
 }
 
 export const TestimonialsSection: React.FC<TestimonialsSectionProps> = ({ onOpenTerms }) => {
-  const [activeFilter, setActiveFilter] = useState<string>('todos');
-
-  const filteredTestimonials = activeFilter === 'todos'
-    ? TESTIMONIALS
-    : TESTIMONIALS.filter(t => {
-        if (activeFilter === 'tributario') return t.course.toLowerCase().includes('tributário');
-        if (activeFilter === 'trabalho') return t.course.toLowerCase().includes('trabalho');
-        if (activeFilter === 'civil') return t.course.toLowerCase().includes('cível');
-        if (activeFilter === 'digital') return t.course.toLowerCase().includes('digital');
-        if (activeFilter === 'oab') return t.tag.toLowerCase().includes('oab');
-        return true;
-      });
-
   return (
     <section id="comentarios-section" className="bg-white border-b border-slate-200">
       
@@ -44,35 +31,11 @@ export const TestimonialsSection: React.FC<TestimonialsSectionProps> = ({ onOpen
           <p className="text-base sm:text-lg text-slate-600 leading-relaxed font-normal">
             Relatos verídicos de profissionais que aceleraram sua prática advocatícia, conquistaram a aprovação no Exame de Ordem e conquistaram novas oportunidades no mercado jurídico.
           </p>
-
-          {/* Quick Filter Tags */}
-          <div className="flex flex-wrap items-center justify-center gap-2 pt-2">
-            {[
-              { id: 'todos', label: 'Todos os Comentários' },
-              { id: 'tributario', label: 'Pós Tributário' },
-              { id: 'trabalho', label: 'Pós Trabalho' },
-              { id: 'civil', label: 'Pós Civil' },
-              { id: 'digital', label: 'Direito Digital & IA' },
-              { id: 'oab', label: 'Aprovados OAB' },
-            ].map((tab) => (
-              <button
-                key={tab.id}
-                onClick={() => setActiveFilter(tab.id)}
-                className={`text-xs sm:text-sm px-4 py-1.5 rounded-full font-semibold transition-all cursor-pointer ${
-                  activeFilter === tab.id
-                    ? 'bg-[#0b1b36] text-white shadow-md'
-                    : 'bg-slate-100 text-slate-700 hover:bg-slate-200 border border-slate-200'
-                }`}
-              >
-                {tab.label}
-              </button>
-            ))}
-          </div>
         </div>
 
         {/* Testimonials Cards Grid */}
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 sm:gap-8">
-          {filteredTestimonials.map((t) => (
+          {TESTIMONIALS.map((t) => (
             <div
               key={t.id}
               className="bg-slate-50 border-2 border-slate-200/90 rounded-2xl p-6 sm:p-7 flex flex-col justify-between hover:shadow-xl hover:border-red-500/50 transition-all duration-300 relative group"
