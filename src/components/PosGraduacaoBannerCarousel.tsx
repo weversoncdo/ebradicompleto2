@@ -214,7 +214,7 @@ export const PosGraduacaoBannerCarousel: React.FC<PosGraduacaoBannerCarouselProp
       <div className="relative z-10 max-w-7xl mx-auto px-8 sm:px-14 lg:px-16 py-8 sm:py-12 lg:py-16">
         
         {/* Top Carousel Navigation Tabs (Quick Select) */}
-        <div className="hidden md:flex items-center gap-2 mb-6 overflow-x-auto pb-2 scrollbar-none">
+        <div className="hidden md:flex flex-wrap items-center gap-2 mb-6 pb-2">
           <span className="text-[11px] font-bold text-amber-400 uppercase tracking-wider shrink-0 mr-2 flex items-center gap-1">
             <Sparkles className="w-3.5 h-3.5" />
             Cursos em Destaque:
