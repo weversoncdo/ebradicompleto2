@@ -3,8 +3,8 @@ import os
 import sys
 import shutil
 import zipfile
-import datetime
 import re
+import tempfile
 
 def main():
     root_dir = os.path.abspath(os.getcwd())
@@ -41,15 +41,11 @@ def main():
     with open(os.path.join(assets_dir, js_file), 'r', encoding='utf-8') as f:
         raw_js = f.read()
 
-    # 2. Build standalone single-file HTML
+    # 2. Build standalone single-file HTML (All-in-one double-clickable file)
     standalone_html = raw_html
-    # Remove link to stylesheet and script
     standalone_html = re.sub(r'<link\s+rel="stylesheet"[^>]*href="[^"]*"[^>]*>', '', standalone_html)
     standalone_html = re.sub(r'<script\s+type="module"[^>]*src="[^"]*"[^>]*></script>', '', standalone_html)
-
-    # Embed CSS before </head>
     standalone_html = standalone_html.replace('</head>', f'<style>\n{raw_css}\n</style>\n</head>')
-    # Embed JS before </body>
     standalone_html = standalone_html.replace('</body>', f'<script>\n{raw_js}\n</script>\n</body>')
 
     with open(os.path.join(download_dir, 'ebradi-home-standalone.html'), 'w', encoding='utf-8') as f:
@@ -73,7 +69,7 @@ def main():
         shutil.rmtree(target_assets_dir)
     shutil.copytree(assets_dir, target_assets_dir)
 
-    # 6. Copy public assets (except download and assets) into download directory
+    # 6. Copy public assets into download directory
     for item in os.listdir(public_dir):
         if item in ['download', 'assets']:
             continue
@@ -148,104 +144,69 @@ EBRADI - Escola Brasileira de Direito • Nota 5 no MEC
     with open(os.path.join(download_dir, 'README.txt'), 'w', encoding='utf-8') as f:
         f.write(readme_content)
 
-    # 8. Create the ZIP archive containing ALL files and resources
+    # 8. Create ZIP using shutil.make_archive (Standard cross-platform ZIP)
     zip_path = os.path.join(download_dir, 'ebradi-home-codigo.zip')
     if os.path.exists(zip_path):
         os.remove(zip_path)
 
-    now = datetime.datetime.now()
-    default_dt = (now.year, now.month, now.day, now.hour, now.minute, now.second)
-    added_names = set()
+    print("Staging files for ZIP packaging...")
+    with tempfile.TemporaryDirectory() as temp_dir:
+        staging_dir = os.path.join(temp_dir, 'ebradi_home_completo')
+        os.makedirs(staging_dir)
 
-    def add_file_to_zip(zf, file_path, arcname):
-        clean_arcname = arcname.replace('\\', '/')
-        if clean_arcname in added_names:
-            return
-        added_names.add(clean_arcname)
+        # 8.1 Copy root ready-to-run files
+        for f in ['ebradi-home-standalone.html', 'index.html', 'styles.css', 'app.js', 'LEIA-ME.txt', 'README.txt']:
+            src = os.path.join(download_dir, f)
+            if os.path.exists(src):
+                shutil.copy2(src, os.path.join(staging_dir, f))
 
-        st = os.stat(file_path)
-        mtime = datetime.datetime.fromtimestamp(st.st_mtime)
-        dt = (mtime.year, mtime.month, mtime.day, mtime.hour, mtime.minute, mtime.second)
-        
-        with open(file_path, 'rb') as fp:
-            data = fp.read()
+        # 8.2 Copy production assets (CSS, JS, patronos images)
+        shutil.copytree(target_assets_dir, os.path.join(staging_dir, 'assets'))
 
-        zinfo = zipfile.ZipInfo(clean_arcname, dt)
-        zinfo.compress_type = zipfile.ZIP_DEFLATED
-        # Set standard Unix file permissions 0644 (0o100644)
-        zinfo.external_attr = 0o100644 << 16
-        zf.writestr(zinfo, data)
-
-    def add_dir_to_zip(zf, dir_path, arcname_prefix):
-        for root, dirs, files in os.walk(dir_path):
-            dirs.sort()
-            files.sort()
-            for dir_name in dirs:
-                full_dir = os.path.join(root, dir_name)
-                rel_dir = os.path.relpath(full_dir, dir_path)
-                arc_dir = os.path.join(arcname_prefix, rel_dir).replace('\\', '/') + '/'
-                if arc_dir not in added_names:
-                    added_names.add(arc_dir)
-                    zinfo = zipfile.ZipInfo(arc_dir, default_dt)
-                    zinfo.compress_type = zipfile.ZIP_STORED
-                    # Set standard Unix directory permissions 0755 (0o040755)
-                    zinfo.external_attr = 0o040755 << 16
-                    zf.writestr(zinfo, b'')
-
-            for file_name in files:
-                full_path = os.path.join(root, file_name)
-                rel_path = os.path.relpath(full_path, dir_path)
-                arcname = os.path.join(arcname_prefix, rel_path).replace('\\', '/')
-                add_file_to_zip(zf, full_path, arcname)
-
-    print("Creating ZIP file with all resources...")
-    with zipfile.ZipFile(zip_path, 'w', zipfile.ZIP_DEFLATED) as zf:
-        # A) Ready-to-run files at the root of the ZIP
-        add_file_to_zip(zf, os.path.join(download_dir, 'ebradi-home-standalone.html'), 'ebradi-home-standalone.html')
-        add_file_to_zip(zf, os.path.join(download_dir, 'index.html'), 'index.html')
-        add_file_to_zip(zf, os.path.join(download_dir, 'styles.css'), 'styles.css')
-        add_file_to_zip(zf, os.path.join(download_dir, 'app.js'), 'app.js')
-        add_file_to_zip(zf, os.path.join(download_dir, 'LEIA-ME.txt'), 'LEIA-ME.txt')
-        add_file_to_zip(zf, os.path.join(download_dir, 'README.txt'), 'README.txt')
-
-        # Add assets directory (CSS, JS, and all patrono photos)
-        add_dir_to_zip(zf, target_assets_dir, 'assets')
-
-        # Add public image files at root
+        # 8.3 Copy public image assets
         for item in os.listdir(public_dir):
             if item in ['download', 'assets']:
                 continue
-            item_path = os.path.join(public_dir, item)
-            if os.path.isfile(item_path):
-                add_file_to_zip(zf, item_path, item)
-            elif os.path.isdir(item_path):
-                add_dir_to_zip(zf, item_path, item)
+            src = os.path.join(public_dir, item)
+            dst = os.path.join(staging_dir, item)
+            if os.path.isfile(src):
+                shutil.copy2(src, dst)
+            elif os.path.isdir(src):
+                shutil.copytree(src, dst)
 
-        # B) Add complete project source code in 'codigo-fonte/'
-        src_dir = os.path.join(root_dir, 'src')
-        if os.path.exists(src_dir):
-            add_dir_to_zip(zf, src_dir, 'codigo-fonte/src')
+        # 8.4 Copy complete React source code into codigo-fonte/
+        source_dir = os.path.join(staging_dir, 'codigo-fonte')
+        os.makedirs(source_dir)
+        shutil.copytree(os.path.join(root_dir, 'src'), os.path.join(source_dir, 'src'))
 
-        # Add source public assets
+        # Copy public assets to source public/
+        source_pub = os.path.join(source_dir, 'public')
+        os.makedirs(source_pub)
         for item in os.listdir(public_dir):
             if item == 'download':
                 continue
-            item_path = os.path.join(public_dir, item)
-            if os.path.isfile(item_path):
-                add_file_to_zip(zf, item_path, f'codigo-fonte/public/{item}')
-            elif os.path.isdir(item_path):
-                add_dir_to_zip(zf, item_path, f'codigo-fonte/public/{item}')
+            src = os.path.join(public_dir, item)
+            dst = os.path.join(source_pub, item)
+            if os.path.isfile(src):
+                shutil.copy2(src, dst)
+            elif os.path.isdir(src):
+                shutil.copytree(src, dst)
 
-        # Add root config files to codigo-fonte/
+        # Copy project configurations
         for cfg in ['package.json', 'vite.config.ts', 'tsconfig.json', 'tsconfig.app.json', 'tsconfig.node.json', 'index.html']:
             cfg_path = os.path.join(root_dir, cfg)
             if os.path.exists(cfg_path):
-                add_file_to_zip(zf, cfg_path, f'codigo-fonte/{cfg}')
+                shutil.copy2(cfg_path, os.path.join(source_dir, cfg))
+
+        print("Building standard ZIP archive with shutil.make_archive...")
+        # shutil.make_archive automatically configures both MS-DOS (0x10) and Unix (0755/0644) attributes
+        temp_zip = shutil.make_archive(os.path.join(temp_dir, 'archive'), 'zip', staging_dir)
+        shutil.copy2(temp_zip, zip_path)
 
     zip_size_mb = os.path.getsize(zip_path) / (1024 * 1024)
     print(f"✅ ZIP successfully created: {zip_path} ({zip_size_mb:.2f} MB)")
 
-    # 9. Sync download files to dist/download (CRITICAL for live preview & production serving)
+    # 9. Sync download files to dist/download (critical for live web serving)
     dist_download = os.path.join(dist_dir, 'download')
     os.makedirs(dist_download, exist_ok=True)
     for item in os.listdir(download_dir):

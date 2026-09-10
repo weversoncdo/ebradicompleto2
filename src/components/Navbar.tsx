@@ -10,15 +10,13 @@ import {
   Award, 
   BookOpen, 
   ChevronRight,
-  ExternalLink,
-  Download
+  ExternalLink
 } from 'lucide-react';
 import { EbradiLogo } from './EbradiLogo';
 
 interface NavbarProps {
   onOpenStudentPortal: () => void;
   onOpenEnrollment: () => void;
-  onOpenDownload?: () => void;
   onSelectCategory: (category: string) => void;
   searchQuery: string;
   setSearchQuery: (query: string) => void;
@@ -27,7 +25,6 @@ interface NavbarProps {
 export const Navbar: React.FC<NavbarProps> = ({
   onOpenStudentPortal,
   onOpenEnrollment,
-  onOpenDownload,
   onSelectCategory,
   searchQuery,
   setSearchQuery,
@@ -72,17 +69,6 @@ export const Navbar: React.FC<NavbarProps> = ({
               <Headset className="w-3.5 h-3.5 text-emerald-400" />
               <span>Atendimento para Alunos</span>
             </a>
-
-            {onOpenDownload && (
-              <button 
-                onClick={onOpenDownload}
-                className="flex items-center gap-1.5 text-amber-300 hover:text-white transition-colors font-bold border-l border-slate-700 pl-3 cursor-pointer"
-                title="Baixar código HTML, CSS e JS desta página"
-              >
-                <Download className="w-3.5 h-3.5 text-amber-400" />
-                <span>Baixar Código da Home</span>
-              </button>
-            )}
           </div>
         </div>
       </div>
@@ -147,17 +133,6 @@ export const Navbar: React.FC<NavbarProps> = ({
                 />
                 <Search className="w-3.5 h-3.5 text-slate-400 absolute left-3 top-2.5" />
               </div>
-
-              {onOpenDownload && (
-                <button
-                  onClick={onOpenDownload}
-                  className="px-3.5 py-2 rounded-lg border border-amber-400/60 hover:border-amber-400 text-amber-300 hover:text-white hover:bg-amber-400/10 text-xs font-bold transition-all flex items-center gap-1.5 cursor-pointer shadow-xs whitespace-nowrap"
-                  title="Baixar código HTML, CSS e JS desta página"
-                >
-                  <Download className="w-3.5 h-3.5 text-amber-400" />
-                  <span>Baixar Código</span>
-                </button>
-              )}
 
               <button
                 onClick={onOpenStudentPortal}
@@ -260,18 +235,6 @@ export const Navbar: React.FC<NavbarProps> = ({
               <Headset className="w-4 h-4 text-emerald-400" />
               <span>Atendimento para Alunos</span>
             </a>
-            {onOpenDownload && (
-              <button
-                onClick={() => {
-                  setIsMobileMenuOpen(false);
-                  onOpenDownload();
-                }}
-                className="w-full py-2.5 rounded-lg border border-amber-500/50 bg-amber-500/10 text-amber-300 font-bold text-center text-sm flex items-center justify-center gap-2"
-              >
-                <Download className="w-4 h-4 text-amber-400" />
-                <span>Baixar Código da Home (HTML/CSS/JS)</span>
-              </button>
-            )}
             <button
               onClick={() => {
                 setIsMobileMenuOpen(false);

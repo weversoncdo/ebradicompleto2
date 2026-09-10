@@ -15,10 +15,9 @@ import { FaqSection } from './components/FaqSection';
 import { Footer } from './components/Footer';
 import { EnrollmentModal } from './components/EnrollmentModal';
 import { StudentPortalModal } from './components/StudentPortalModal';
-import { DownloadPageModal } from './components/DownloadPageModal';
 import { AccessibilityMenu } from './components/AccessibilityMenu';
 import { PrivacyModal } from './components/PrivacyModal';
-import { MessageCircle, ArrowUp, Download } from 'lucide-react';
+import { MessageCircle, ArrowUp } from 'lucide-react';
 
 export default function App() {
   const [selectedCategory, setSelectedCategory] = useState<string>('pos');
@@ -29,7 +28,6 @@ export default function App() {
   const [courseForEnrollment, setCourseForEnrollment] = useState<Course | null>(null);
   const [isEnrollmentOpen, setIsEnrollmentOpen] = useState<boolean>(false);
   const [isStudentPortalOpen, setIsStudentPortalOpen] = useState<boolean>(false);
-  const [isDownloadModalOpen, setIsDownloadModalOpen] = useState<boolean>(false);
   const [isAccessibilityOpen, setIsAccessibilityOpen] = useState<boolean>(false);
   const [isPrivacyOpen, setIsPrivacyOpen] = useState<boolean>(false);
   
@@ -70,7 +68,6 @@ export default function App() {
       <Navbar
         onOpenStudentPortal={() => setIsStudentPortalOpen(true)}
         onOpenEnrollment={handleOpenEnrollmentGeneral}
-        onOpenDownload={() => setIsDownloadModalOpen(true)}
         onSelectCategory={(cat) => setSelectedCategory(cat)}
         searchQuery={searchQuery}
         setSearchQuery={setSearchQuery}
@@ -161,11 +158,6 @@ export default function App() {
         onClose={() => setIsStudentPortalOpen(false)}
       />
 
-      <DownloadPageModal
-        isOpen={isDownloadModalOpen}
-        onClose={() => setIsDownloadModalOpen(false)}
-      />
-
       {/* Privacy & LGPD Modal */}
       <PrivacyModal
         isOpen={isPrivacyOpen}
@@ -186,18 +178,6 @@ export default function App() {
       {/* Floating Action Buttons (Right) */}
       <div className="fixed bottom-6 right-6 z-30 flex flex-col items-end gap-3 pointer-events-none">
         
-        {/* Floating Download Button */}
-        <button
-          onClick={() => setIsDownloadModalOpen(true)}
-          className="pointer-events-auto flex items-center gap-2 px-4 py-2.5 bg-[#0b1b36] hover:bg-[#12284d] text-white font-bold text-xs rounded-full shadow-xl border border-slate-700 transition-all transform hover:scale-105 group cursor-pointer"
-          title="Baixar HTML, CSS e JavaScript desta página"
-        >
-          <div className="w-5 h-5 rounded-full bg-amber-400 text-slate-950 flex items-center justify-center">
-            <Download className="w-3 h-3 group-hover:animate-bounce" />
-          </div>
-          <span className="hidden sm:inline">Baixar Código</span>
-        </button>
-
         {/* Floating WhatsApp Button */}
         <a
           href="https://api.whatsapp.com/send?phone=5511999999999&text=Ol%C3%A1!%20Gostaria%20de%20tirar%20uma%20d%C3%BAvida%20sobre%20os%20cursos%20da%20EBRADI."
