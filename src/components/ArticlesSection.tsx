@@ -23,20 +23,22 @@ export const ArticlesSection: React.FC = () => {
           </div>
 
           <a
-            href="#cursos-section"
-            className="inline-flex items-center gap-1.5 text-xs font-bold text-red-600 hover:text-red-700 uppercase tracking-wider transition-colors shrink-0"
+            href="#artigos-section"
+            className="hidden md:inline-flex items-center gap-1.5 text-xs font-bold text-red-600 hover:text-red-700 uppercase tracking-wider transition-colors shrink-0"
           >
-            <span>Ver Todos os Cursos</span>
+            <span>Ver Todos os Artigos</span>
             <ArrowRight className="w-4 h-4" />
           </a>
         </div>
 
         {/* Articles Grid */}
         <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
-          {ARTICLES.map((art) => (
+          {ARTICLES.map((art, index) => (
             <article
               key={art.id}
-              className="bg-white rounded-2xl border border-slate-200 shadow-sm hover:shadow-lg transition-all overflow-hidden flex flex-col justify-between group"
+              className={`bg-white rounded-2xl border border-slate-200 shadow-sm hover:shadow-lg transition-all overflow-hidden flex flex-col justify-between group ${
+                index >= 2 ? 'hidden md:flex' : 'flex'
+              }`}
             >
               <div>
                 <div className="relative h-48 overflow-hidden">
@@ -83,6 +85,17 @@ export const ArticlesSection: React.FC = () => {
               </div>
             </article>
           ))}
+        </div>
+
+        {/* Mobile: Ver Todos os Artigos below the second card */}
+        <div className="mt-8 flex md:hidden justify-start">
+          <a
+            href="#artigos-section"
+            className="inline-flex items-center gap-1.5 text-xs font-bold text-red-600 hover:text-red-700 uppercase tracking-wider transition-colors shrink-0"
+          >
+            <span>Ver Todos os Artigos</span>
+            <ArrowRight className="w-4 h-4" />
+          </a>
         </div>
 
       </div>

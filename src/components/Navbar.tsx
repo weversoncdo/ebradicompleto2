@@ -46,10 +46,10 @@ export const Navbar: React.FC<NavbarProps> = ({
   return (
     <header className="sticky top-0 z-40 w-full bg-[#0b1b36] shadow-md transition-all">
       {/* Top Notification & Utility Bar */}
-      <div className="bg-[#071326] text-slate-200 py-3.5 sm:py-3 px-4 border-b border-slate-800/80 min-h-[48px] flex items-center">
+      <div className="bg-[#071326] text-slate-200 py-1.5 sm:py-2.5 px-4 border-b border-slate-800/80 min-h-[34px] sm:min-h-[40px] flex items-center">
         <div className="max-w-7xl mx-auto w-full flex items-center justify-center md:justify-between gap-2 sm:gap-3">
-          <div className="flex items-center gap-2.5 text-center md:text-left justify-center leading-normal whitespace-nowrap">
-            <span className="inline-flex items-center justify-center shrink-0 px-3 py-1 rounded bg-red-600 text-white font-bold uppercase tracking-wider text-[10px] sm:text-[11px] leading-tight shadow-sm">
+          <div className="flex items-center gap-2 text-center md:text-left justify-center leading-normal whitespace-nowrap">
+            <span className="inline-flex items-center justify-center shrink-0 px-2.5 py-0.5 sm:px-3 sm:py-1 rounded bg-red-600 text-white font-bold uppercase tracking-wider text-[10px] sm:text-[11px] leading-tight shadow-sm">
               Nota 5 no MEC
             </span>
             <span className="text-slate-500 font-normal text-xs">|</span>
@@ -76,11 +76,11 @@ export const Navbar: React.FC<NavbarProps> = ({
       {/* Main Navbar (Background #0b1b36 com a Logo EBRADI 10 Anos) */}
       <div className="w-full bg-[#0b1b36] border-b border-slate-800">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="flex items-center justify-between h-20 sm:h-22">
+          <div className="flex items-center justify-between h-16 sm:h-20 lg:h-22">
             {/* Logo EBRADI 10 ANOS */}
             <a 
               href="#" 
-              className="flex items-center group focus:outline-none py-1 hover:opacity-95 transition-opacity" 
+              className="flex items-center group focus:outline-none py-0.5 hover:opacity-95 transition-opacity" 
               title="EBRADI 10 Anos - Escola Brasileira de Direito"
             >
               <EbradiLogo variant="dark" size="md" className="group-hover:scale-102 transition-transform duration-200" />
