@@ -35,10 +35,12 @@ export const TestimonialsSection: React.FC<TestimonialsSectionProps> = ({ onOpen
 
         {/* Testimonials Cards Grid */}
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 sm:gap-8">
-          {TESTIMONIALS.map((t) => (
+          {TESTIMONIALS.map((t, index) => (
             <div
               key={t.id}
-              className="bg-slate-50 border-2 border-slate-200/90 rounded-2xl p-6 sm:p-7 flex flex-col justify-between hover:shadow-xl hover:border-red-500/50 transition-all duration-300 relative group"
+              className={`bg-slate-50 border-2 border-slate-200/90 rounded-2xl p-6 sm:p-7 flex-col justify-between hover:shadow-xl hover:border-red-500/50 transition-all duration-300 relative group ${
+                index >= 3 ? 'hidden md:flex' : 'flex'
+              }`}
             >
               <div className="space-y-4">
                 

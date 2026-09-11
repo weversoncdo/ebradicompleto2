@@ -1,5 +1,5 @@
-import React from 'react';
-import { Handshake, ArrowRight, ShieldCheck, CheckCircle2 } from 'lucide-react';
+import React, { useRef, useState } from 'react';
+import { Handshake, ArrowRight, ShieldCheck, CheckCircle2, ChevronLeft, ChevronRight } from 'lucide-react';
 
 interface Partner {
   id: string;
@@ -223,6 +223,30 @@ interface PartnersSectionProps {
 }
 
 export const PartnersSection: React.FC<PartnersSectionProps> = ({ onOpenEnrollment }) => {
+  const carouselRef = useRef<HTMLDivElement>(null);
+  const [canScrollLeft, setCanScrollLeft] = useState(false);
+  const [canScrollRight, setCanScrollRight] = useState(true);
+
+  // Check scroll boundary state on mobile carousel
+  const handleScroll = () => {
+    if (carouselRef.current) {
+      const { scrollLeft, scrollWidth, clientWidth } = carouselRef.current;
+      setCanScrollLeft(scrollLeft > 10);
+      setCanScrollRight(scrollLeft < scrollWidth - clientWidth - 10);
+    }
+  };
+
+  // Manual slide control for mobile slider
+  const handleScrollStep = (direction: 'left' | 'right') => {
+    if (carouselRef.current) {
+      const step = carouselRef.current.clientWidth;
+      carouselRef.current.scrollBy({
+        left: direction === 'left' ? -step : step,
+        behavior: 'smooth',
+      });
+    }
+  };
+
   return (
     <section id="parceiros-section" className="py-20 lg:py-24 bg-gradient-to-b from-[#08152c] via-[#0b1b36] to-[#071329] text-white border-b border-slate-800 relative overflow-hidden">
       {/* Background Decorative Grid */}
@@ -251,49 +275,84 @@ export const PartnersSection: React.FC<PartnersSectionProps> = ({ onOpenEnrollme
           </p>
         </div>
 
-        {/* Partners Cards Grid - 2 per row on mobile, 2 per row on desktop */}
-        <div className="grid grid-cols-2 lg:grid-cols-2 gap-2.5 sm:gap-6 max-w-6xl mx-auto">
-          {PARTNERS.map((partner, index) => {
-            const isLastSingle = index === PARTNERS.length - 1 && PARTNERS.length % 2 !== 0;
-            return (
-              <div
-                key={partner.id}
-                className={`bg-white rounded-xl sm:rounded-2xl p-3 sm:p-7 shadow-xl border border-slate-100 hover:shadow-2xl hover:border-slate-200 transition-all duration-300 transform hover:-translate-y-1 flex flex-col justify-between ${
-                  isLastSingle ? 'col-span-2 sm:col-span-1 lg:col-span-2 lg:max-w-xl lg:mx-auto w-full' : ''
-                }`}
-              >
-                <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-2.5 sm:gap-5 h-full">
-                  {/* Left Column / Main Info: Tag, Title and Description */}
-                  <div className="flex-1 space-y-1.5 sm:space-y-2.5">
-                    {/* Top Tag Badge */}
-                    <div className="inline-block">
-                      <span className="bg-[#1ea88e] text-white text-[9px] sm:text-[11px] font-bold px-2 py-0.5 sm:px-3 sm:py-1 rounded uppercase tracking-wider shadow-xs">
-                        {partner.tag}
-                      </span>
+        {/* Partners Cards Carousel on Mobile, 2-Column Grid on Desktop */}
+        <div>
+          <div 
+            ref={carouselRef}
+            onScroll={handleScroll}
+            className="flex md:grid md:grid-cols-2 gap-0 md:gap-6 overflow-x-auto md:overflow-visible snap-x snap-mandatory scroll-smooth no-scrollbar w-full py-2 max-w-6xl mx-auto"
+          >
+            {PARTNERS.map((partner, index) => {
+              const isLastSingle = index === PARTNERS.length - 1 && PARTNERS.length % 2 !== 0;
+              return (
+                <div
+                  key={partner.id}
+                  className={`w-full shrink-0 md:shrink md:w-auto snap-center bg-white rounded-2xl p-6 sm:p-7 shadow-xl border border-slate-100 hover:shadow-2xl hover:border-slate-200 transition-all duration-300 transform hover:-translate-y-1 flex flex-col justify-between ${
+                    isLastSingle ? 'md:col-span-2 md:max-w-xl md:mx-auto' : ''
+                  }`}
+                >
+                  <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 sm:gap-5 h-full">
+                    {/* Left Column / Main Info: Tag, Title and Description */}
+                    <div className="flex-1 space-y-2 sm:space-y-2.5">
+                      {/* Top Tag Badge */}
+                      <div className="inline-block">
+                        <span className="bg-[#1ea88e] text-white text-[11px] sm:text-xs font-bold px-3 py-1 rounded uppercase tracking-wider shadow-xs">
+                          {partner.tag}
+                        </span>
+                      </div>
+
+                      {/* Title */}
+                      <h3 className="text-slate-900 font-extrabold text-base sm:text-lg tracking-tight leading-snug uppercase pt-1">
+                        {partner.title}
+                      </h3>
+
+                      {/* Description */}
+                      <p className="text-slate-700 text-xs sm:text-sm leading-relaxed font-normal">
+                        {partner.description}
+                      </p>
                     </div>
 
-                    {/* Title */}
-                    <h3 className="text-slate-900 font-extrabold text-[11px] sm:text-base lg:text-lg tracking-tight leading-snug uppercase pt-0.5">
-                      {partner.title}
-                    </h3>
+                    {/* Vertical Divider */}
+                    <div className="hidden sm:block w-px h-24 bg-slate-200 shrink-0 mx-2" />
 
-                    {/* Description */}
-                    <p className="text-slate-700 text-[10px] sm:text-xs lg:text-sm leading-normal sm:leading-relaxed font-normal">
-                      {partner.description}
-                    </p>
-                  </div>
-
-                  {/* Vertical Divider */}
-                  <div className="hidden sm:block w-px h-24 bg-slate-200 shrink-0 mx-2" />
-
-                  {/* Right Column / Bottom on mobile: Official Logo */}
-                  <div className="shrink-0 flex items-center justify-center p-1 sm:p-2 rounded-lg bg-slate-50/70 sm:bg-transparent mt-1 sm:mt-0">
-                    <PartnerLogo type={partner.logoType} />
+                    {/* Right Column / Bottom on mobile: Official Logo */}
+                    <div className="shrink-0 flex items-center justify-center p-3 sm:p-2 rounded-xl bg-slate-50 sm:bg-transparent border border-slate-100 sm:border-0 mt-3 sm:mt-0">
+                      <PartnerLogo type={partner.logoType} />
+                    </div>
                   </div>
                 </div>
-              </div>
-            );
-          })}
+              );
+            })}
+          </div>
+
+          {/* Mobile Manual Slider Carousel Controls (matching Course Catalog slider) */}
+          {PARTNERS.length > 1 && (
+            <div className="flex md:hidden items-center justify-center gap-3.5 mt-5">
+              <button
+                type="button"
+                onClick={() => handleScrollStep('left')}
+                disabled={!canScrollLeft}
+                aria-label="Voltar para parceiro anterior"
+                className={`w-11 h-11 rounded-full bg-white text-[#0b1b36] shadow-md border border-slate-200/90 flex items-center justify-center transition-all cursor-pointer ${
+                  !canScrollLeft ? 'opacity-40 cursor-not-allowed' : 'hover:bg-slate-100 active:scale-95'
+                }`}
+              >
+                <ChevronLeft className="w-6 h-6 text-[#0b1b36] stroke-[2.5]" />
+              </button>
+
+              <button
+                type="button"
+                onClick={() => handleScrollStep('right')}
+                disabled={!canScrollRight}
+                aria-label="Avançar para próximo parceiro"
+                className={`w-11 h-11 rounded-full bg-white text-[#0b1b36] shadow-md border border-slate-200/90 flex items-center justify-center transition-all cursor-pointer ${
+                  !canScrollRight ? 'opacity-40 cursor-not-allowed' : 'hover:bg-slate-100 active:scale-95'
+                }`}
+              >
+                <ChevronRight className="w-6 h-6 text-[#0b1b36] stroke-[2.5]" />
+              </button>
+            </div>
+          )}
         </div>
 
         {/* Bottom Banner with Benefit Information */}
