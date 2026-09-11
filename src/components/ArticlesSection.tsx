@@ -2,6 +2,12 @@ import React from 'react';
 import { ARTICLES } from '../data/testimonials';
 import { BookOpen, Calendar, Clock, ArrowRight } from 'lucide-react';
 
+// ============================================================================
+// ESPAÇO PARA INSERIR LINK DE REDIRECIONAMENTO DE TODOS OS ARTIGOS:
+// Quando tiver a URL, preencha a constante abaixo (ex: "https://...").
+// ============================================================================
+const ALL_ARTICLES_PAGE_URL = "";
+
 export const ArticlesSection: React.FC = () => {
   return (
     <section id="artigos-section" className="py-20 lg:py-28 bg-slate-50 border-b border-slate-200">
@@ -22,9 +28,16 @@ export const ArticlesSection: React.FC = () => {
             </p>
           </div>
 
+          {/* INSERIR LINK DA PÁGINA DE TODOS OS ARTIGOS AQUI: quando tiver o link, preencha ALL_ARTICLES_PAGE_URL acima */}
           <a
-            href="#artigos-section"
+            href={ALL_ARTICLES_PAGE_URL || "#"}
+            onClick={(e) => {
+              if (!ALL_ARTICLES_PAGE_URL || ALL_ARTICLES_PAGE_URL === '#') {
+                e.preventDefault();
+              }
+            }}
             className="hidden md:inline-flex items-center gap-1.5 text-xs font-bold text-red-600 hover:text-red-700 uppercase tracking-wider transition-colors shrink-0"
+            title="Ver Todos os Artigos"
           >
             <span>Ver Todos os Artigos</span>
             <ArrowRight className="w-4 h-4" />
@@ -89,9 +102,16 @@ export const ArticlesSection: React.FC = () => {
 
         {/* Mobile: Ver Todos os Artigos below the second card */}
         <div className="mt-8 flex md:hidden justify-start">
+          {/* INSERIR LINK DA PÁGINA DE TODOS OS ARTIGOS AQUI: quando tiver o link, preencha ALL_ARTICLES_PAGE_URL acima */}
           <a
-            href="#artigos-section"
+            href={ALL_ARTICLES_PAGE_URL || "#"}
+            onClick={(e) => {
+              if (!ALL_ARTICLES_PAGE_URL || ALL_ARTICLES_PAGE_URL === '#') {
+                e.preventDefault();
+              }
+            }}
             className="inline-flex items-center gap-1.5 text-xs font-bold text-red-600 hover:text-red-700 uppercase tracking-wider transition-colors shrink-0"
+            title="Ver Todos os Artigos"
           >
             <span>Ver Todos os Artigos</span>
             <ArrowRight className="w-4 h-4" />

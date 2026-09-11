@@ -15,6 +15,12 @@ import {
 import { COURSES } from '../data/courses';
 import { Course } from '../types';
 
+// ============================================================================
+// ESPAÇO PARA INSERIR LINK DE REDIRECIONAMENTO DE MATRÍCULA (CURSOS PREPARATÓRIOS OAB)
+// Quando tiver a URL, preencha a constante abaixo (ex: "https://...") ou em course.productUrl.
+// ============================================================================
+const OAB_ENROLL_URL = "";
+
 interface OabSpecialSectionProps {
   onSelectCourse: (course: Course) => void;
   onEnrollCourse: (course: Course) => void;
@@ -159,12 +165,20 @@ export const OabSpecialSection: React.FC<OabSpecialSectionProps> = ({
                       </span>
                     </div>
 
-                    <button
-                      onClick={() => onEnrollCourse(course)}
-                      className="px-4 py-2 bg-red-600 hover:bg-red-700 text-white font-bold text-xs uppercase tracking-wider rounded-lg transition-colors cursor-pointer"
+                    {/* INSERIR LINK DA PÁGINA DO CURSO PREPARATÓRIO AQUI: quando tiver o link de redirecionamento, preencha OAB_ENROLL_URL acima ou course.productUrl */}
+                    <a
+                      href={course.productUrl || OAB_ENROLL_URL || "#"}
+                      onClick={(e) => {
+                        const targetHref = course.productUrl || OAB_ENROLL_URL;
+                        if (!targetHref || targetHref === '#') {
+                          e.preventDefault();
+                        }
+                      }}
+                      className="px-4 py-2 bg-red-600 hover:bg-red-700 text-white font-bold text-xs uppercase tracking-wider rounded-lg transition-colors cursor-pointer text-center inline-block"
+                      title="Matricular no Curso Preparatório"
                     >
                       Matricular
-                    </button>
+                    </a>
                   </div>
                 </div>
               ))}

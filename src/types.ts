@@ -34,6 +34,7 @@ export interface Course {
   installments: number;
   popular?: boolean;
   partner?: string;
+  productUrl?: string; // Espaço para inserir o link de redirecionamento da página de produto
 }
 
 export interface FacultyMember {

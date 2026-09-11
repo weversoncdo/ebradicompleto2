@@ -18,6 +18,13 @@ import {
   ChevronRight
 } from 'lucide-react';
 
+// ============================================================================
+// ESPAÇO PARA INSERIR LINK DE REDIRECIONAMENTO DA PÁGINA DE PRODUTO:
+// Quando tiver a URL da página de produto, preencha a constante abaixo (ex: "https://...")
+// ou configure a propriedade `productUrl` em cada curso em src/data/courses.ts.
+// ============================================================================
+const DEFAULT_PRODUCT_PAGE_URL = "";
+
 interface CourseCatalogProps {
   selectedCategory: string;
   onSelectCategory: (category: string) => void;
@@ -355,12 +362,20 @@ export const CourseCatalog: React.FC<CourseCatalogProps> = ({
                         <ArrowUpRight className="w-3.5 h-3.5" />
                       </button>
 
-                      <button
-                        onClick={() => onEnrollCourse(course)}
+                      {/* INSERIR LINK DA PÁGINA DO PRODUTO AQUI: quando tiver a URL de redirecionamento, preencha DEFAULT_PRODUCT_PAGE_URL acima ou course.productUrl */}
+                      <a
+                        href={course.productUrl || DEFAULT_PRODUCT_PAGE_URL || "#"}
+                        onClick={(e) => {
+                          const targetHref = course.productUrl || DEFAULT_PRODUCT_PAGE_URL;
+                          if (!targetHref || targetHref === '#') {
+                            e.preventDefault();
+                          }
+                        }}
                         className="py-2.5 sm:py-2.5 px-2 sm:px-3 rounded-lg bg-red-600 hover:bg-red-700 text-white font-extrabold text-xs uppercase tracking-wider text-center shadow-md hover:shadow-lg transition-all flex items-center justify-center gap-1 cursor-pointer"
+                        title="Garantir Vaga"
                       >
                         <span>Garantir Vaga</span>
-                      </button>
+                      </a>
                     </div>
                   </div>
                 </div>

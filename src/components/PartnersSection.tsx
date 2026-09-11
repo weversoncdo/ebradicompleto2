@@ -1,6 +1,12 @@
 import React, { useRef, useState } from 'react';
 import { Handshake, ArrowRight, ShieldCheck, CheckCircle2, ChevronLeft, ChevronRight } from 'lucide-react';
 
+// ============================================================================
+// ESPAÇO PARA INSERIR LINK DE REDIRECIONAMENTO DE CONSULTA DE CONVÊNIO:
+// Quando tiver a URL, preencha a constante abaixo (ex: "https://...").
+// ============================================================================
+const CONVENIO_PAGE_URL = "";
+
 interface Partner {
   id: string;
   tag: string;
@@ -371,15 +377,20 @@ export const PartnersSection: React.FC<PartnersSectionProps> = ({ onOpenEnrollme
             </div>
           </div>
 
-          {onOpenEnrollment && (
-            <button
-              onClick={onOpenEnrollment}
-              className="px-5 py-3 rounded-xl bg-gradient-to-r from-red-600 to-red-700 hover:from-red-500 hover:to-red-600 text-white font-bold text-xs uppercase tracking-wider shrink-0 transition-all flex items-center gap-2 shadow-md cursor-pointer"
-            >
-              <span>Consultar Convênio</span>
-              <ArrowRight className="w-3.5 h-3.5" />
-            </button>
-          )}
+          {/* INSERIR LINK DA PÁGINA DE CONSULTA DE CONVÊNIO AQUI: quando tiver o link de redirecionamento, preencha CONVENIO_PAGE_URL acima */}
+          <a
+            href={CONVENIO_PAGE_URL || "#"}
+            onClick={(e) => {
+              if (!CONVENIO_PAGE_URL || CONVENIO_PAGE_URL === '#') {
+                e.preventDefault();
+              }
+            }}
+            className="px-5 py-3 rounded-xl bg-gradient-to-r from-red-600 to-red-700 hover:from-red-500 hover:to-red-600 text-white font-bold text-xs uppercase tracking-wider shrink-0 transition-all flex items-center gap-2 shadow-md cursor-pointer text-center"
+            title="Consultar Convênio"
+          >
+            <span>Consultar Convênio</span>
+            <ArrowRight className="w-3.5 h-3.5" />
+          </a>
         </div>
 
       </div>
