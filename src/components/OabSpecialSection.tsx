@@ -25,6 +25,8 @@ export const OabSpecialSection: React.FC<OabSpecialSectionProps> = ({
   onEnrollCourse,
 }) => {
   const oabCourses = COURSES.filter(c => c.category === 'oab');
+
+  // Courses Carousel State
   const carouselRef = useRef<HTMLDivElement>(null);
   const [canScrollLeft, setCanScrollLeft] = useState(false);
   const [canScrollRight, setCanScrollRight] = useState(true);
@@ -67,45 +69,46 @@ export const OabSpecialSection: React.FC<OabSpecialSectionProps> = ({
           </p>
         </div>
 
-        {/* 3 Pillars Grid */}
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-8 mb-16">
-          
-          <div className="p-8 rounded-2xl bg-slate-50 border border-slate-200 space-y-4 hover:border-red-300 transition-colors">
-            <div className="w-12 h-12 rounded-xl bg-red-100 text-red-600 flex items-center justify-center">
-              <BarChart3 className="w-6 h-6" />
+        {/* 3 Pillars - 2 side-by-side and 1 below on Mobile, 3-column Grid on Desktop */}
+        <div className="grid grid-cols-2 md:grid-cols-3 gap-3 sm:gap-6 lg:gap-8 mb-12 md:mb-16">
+          {/* Pillar 1: Raio-X Estatístico */}
+          <div className="p-4 sm:p-6 lg:p-8 rounded-2xl bg-slate-50 border border-slate-200 hover:border-red-300 transition-colors flex flex-col justify-start">
+            <div className="w-9 h-9 sm:w-12 sm:h-12 rounded-xl bg-red-100 text-red-600 flex items-center justify-center shrink-0 mb-3">
+              <BarChart3 className="w-5 h-5 sm:w-6 sm:h-6" />
             </div>
-            <h3 className="text-lg font-bold text-[#0b1b36]">
+            <h3 className="text-xs sm:text-base lg:text-lg font-bold text-[#0b1b36] leading-snug mb-2">
               Raio-X Estatístico da Banca FGV
             </h3>
-            <p className="text-xs sm:text-sm text-slate-600 leading-relaxed">
+            <p className="text-[11px] sm:text-xs lg:text-sm text-slate-600 leading-relaxed font-normal">
               Mapeamento de todas as provas dos últimos 10 anos. Você foca 80% do seu tempo nas matérias e artigos que historicamente respondem por 90% dos pontos da 1ª fase.
             </p>
           </div>
 
-          <div className="p-8 rounded-2xl bg-slate-50 border border-slate-200 space-y-4 hover:border-red-300 transition-colors">
-            <div className="w-12 h-12 rounded-xl bg-amber-100 text-amber-700 flex items-center justify-center">
-              <FileText className="w-6 h-6" />
+          {/* Pillar 2: Correção Individualizada */}
+          <div className="p-4 sm:p-6 lg:p-8 rounded-2xl bg-slate-50 border border-slate-200 hover:border-red-300 transition-colors flex flex-col justify-start">
+            <div className="w-9 h-9 sm:w-12 sm:h-12 rounded-xl bg-amber-100 text-amber-700 flex items-center justify-center shrink-0 mb-3">
+              <FileText className="w-5 h-5 sm:w-6 sm:h-6" />
             </div>
-            <h3 className="text-lg font-bold text-[#0b1b36]">
+            <h3 className="text-xs sm:text-base lg:text-lg font-bold text-[#0b1b36] leading-snug mb-2">
               Correção Individualizada na 2ª Fase
             </h3>
-            <p className="text-xs sm:text-sm text-slate-600 leading-relaxed">
+            <p className="text-[11px] sm:text-xs lg:text-sm text-slate-600 leading-relaxed font-normal">
               Professores examinadores corrigem cada linha da sua peça prático-profissional e questões discursivas de acordo com o rigoroso espelho de notas oficial da FGV.
             </p>
           </div>
 
-          <div className="p-8 rounded-2xl bg-slate-50 border border-slate-200 space-y-4 hover:border-red-300 transition-colors">
-            <div className="w-12 h-12 rounded-xl bg-emerald-100 text-emerald-700 flex items-center justify-center">
-              <ShieldCheck className="w-6 h-6" />
+          {/* Pillar 3: Garantia de Aprovação (below the two on mobile) */}
+          <div className="col-span-2 md:col-span-1 p-4 sm:p-6 lg:p-8 rounded-2xl bg-slate-50 border border-slate-200 hover:border-red-300 transition-colors flex flex-col justify-start">
+            <div className="w-9 h-9 sm:w-12 sm:h-12 rounded-xl bg-emerald-100 text-emerald-700 flex items-center justify-center shrink-0 mb-3">
+              <ShieldCheck className="w-5 h-5 sm:w-6 sm:h-6" />
             </div>
-            <h3 className="text-lg font-bold text-[#0b1b36]">
+            <h3 className="text-xs sm:text-base lg:text-lg font-bold text-[#0b1b36] leading-snug mb-2">
               Garantia de Aprovação EBRADI
             </h3>
-            <p className="text-xs sm:text-sm text-slate-600 leading-relaxed">
+            <p className="text-[11px] sm:text-xs lg:text-sm text-slate-600 leading-relaxed font-normal">
               Temos tanta certeza na eficácia do nosso método que, se você cumprir 85% do cronograma e não for aprovado, seu acesso é renovado gratuitamente para o próximo Exame!
             </p>
           </div>
-
         </div>
 
         {/* Highlighted OAB Courses Grid / Carousel on Mobile */}

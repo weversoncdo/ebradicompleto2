@@ -32,53 +32,53 @@ export const MethodologySection: React.FC = () => {
           </p>
         </div>
 
-        {/* 4 Pillars Bento Grid */}
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+        {/* 4 Pillars Bento Grid - 2 side-by-side (2x2) on Mobile, 4-column Grid on Desktop */}
+        <div className="grid grid-cols-2 lg:grid-cols-4 gap-3 sm:gap-6">
           
-          <div className="bg-white p-7 rounded-2xl border border-slate-200 shadow-sm space-y-4 hover:shadow-md transition-shadow">
-            <div className="w-12 h-12 rounded-xl bg-red-100 text-red-600 flex items-center justify-center">
-              <Award className="w-6 h-6" />
+          <div className="bg-white p-4 sm:p-7 rounded-2xl border border-slate-200 shadow-sm space-y-2.5 sm:space-y-4 hover:shadow-md transition-shadow flex flex-col justify-start">
+            <div className="w-9 h-9 sm:w-12 sm:h-12 rounded-xl bg-red-100 text-red-600 flex items-center justify-center shrink-0">
+              <Award className="w-5 h-5 sm:w-6 sm:h-6" />
             </div>
-            <h3 className="text-base font-bold text-[#0b1b36]">
+            <h3 className="text-xs sm:text-base font-bold text-[#0b1b36] leading-snug">
               1. Cátedras de Notáveis
             </h3>
-            <p className="text-xs text-slate-600 leading-relaxed">
+            <p className="text-[11px] sm:text-xs text-slate-600 leading-relaxed font-normal">
               Você aprende diretamente com os autores e desembargadores cujas decisões e doutrinas norteiam a jurisprudência nos tribunais estaduais e superiores (STF/STJ).
             </p>
           </div>
 
-          <div className="bg-white p-7 rounded-2xl border border-slate-200 shadow-sm space-y-4 hover:shadow-md transition-shadow">
-            <div className="w-12 h-12 rounded-xl bg-amber-100 text-amber-700 flex items-center justify-center">
-              <FileCode2 className="w-6 h-6" />
+          <div className="bg-white p-4 sm:p-7 rounded-2xl border border-slate-200 shadow-sm space-y-2.5 sm:space-y-4 hover:shadow-md transition-shadow flex flex-col justify-start">
+            <div className="w-9 h-9 sm:w-12 sm:h-12 rounded-xl bg-amber-100 text-amber-700 flex items-center justify-center shrink-0">
+              <FileCode2 className="w-5 h-5 sm:w-6 sm:h-6" />
             </div>
-            <h3 className="text-base font-bold text-[#0b1b36]">
+            <h3 className="text-xs sm:text-base font-bold text-[#0b1b36] leading-snug">
               2. Prática Forense Aplicada
             </h3>
-            <p className="text-xs text-slate-600 leading-relaxed">
+            <p className="text-[11px] sm:text-xs text-slate-600 leading-relaxed font-normal">
               Nada de teorias desconectadas. Nossos cursos abordam a redação de contratos, petições iniciais complexas, contestações, recursos e atuação em audiências reais.
             </p>
           </div>
 
-          <div className="bg-white p-7 rounded-2xl border border-slate-200 shadow-sm space-y-4 hover:shadow-md transition-shadow">
-            <div className="w-12 h-12 rounded-xl bg-purple-100 text-purple-700 flex items-center justify-center">
-              <BrainCircuit className="w-6 h-6" />
+          <div className="bg-white p-4 sm:p-7 rounded-2xl border border-slate-200 shadow-sm space-y-2.5 sm:space-y-4 hover:shadow-md transition-shadow flex flex-col justify-start">
+            <div className="w-9 h-9 sm:w-12 sm:h-12 rounded-xl bg-purple-100 text-purple-700 flex items-center justify-center shrink-0">
+              <BrainCircuit className="w-5 h-5 sm:w-6 sm:h-6" />
             </div>
-            <h3 className="text-base font-bold text-[#0b1b36]">
+            <h3 className="text-xs sm:text-base font-bold text-[#0b1b36] leading-snug">
               3. IA e Inovação Jurídica
             </h3>
-            <p className="text-xs text-slate-600 leading-relaxed">
+            <p className="text-[11px] sm:text-xs text-slate-600 leading-relaxed font-normal">
               Todos os cursos de pós-graduação incluem um módulo exclusivo de ferramentas práticas de Inteligência Artificial generativa, automação e jurimetria forense.
             </p>
           </div>
 
-          <div className="bg-white p-7 rounded-2xl border border-slate-200 shadow-sm space-y-4 hover:shadow-md transition-shadow">
-            <div className="w-12 h-12 rounded-xl bg-emerald-100 text-emerald-700 flex items-center justify-center">
-              <Building2 className="w-6 h-6" />
+          <div className="bg-white p-4 sm:p-7 rounded-2xl border border-slate-200 shadow-sm space-y-2.5 sm:space-y-4 hover:shadow-md transition-shadow flex flex-col justify-start">
+            <div className="w-9 h-9 sm:w-12 sm:h-12 rounded-xl bg-emerald-100 text-emerald-700 flex items-center justify-center shrink-0">
+              <Building2 className="w-5 h-5 sm:w-6 sm:h-6" />
             </div>
-            <h3 className="text-base font-bold text-[#0b1b36]">
+            <h3 className="text-xs sm:text-base font-bold text-[#0b1b36] leading-snug">
               4. Nota Máxima no MEC (5)
             </h3>
-            <p className="text-xs text-slate-600 leading-relaxed">
+            <p className="text-[11px] sm:text-xs text-slate-600 leading-relaxed font-normal">
               Certificação outorgada pela Universidade São Judas Tadeu (USJT), instituição com conceito institucional máximo no MEC e pertencente ao Ecossistema Ânima.
             </p>
           </div>
